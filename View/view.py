@@ -1,4 +1,5 @@
 from View.MainUI import Ui_DataMarker
+from View.VideoWidget import VideoWidget
 from PyQt5 import QtWidgets, QtCore
 import sys
 
@@ -37,6 +38,10 @@ class View:
         self.ui.setupUi(self.mainWidget)
         self.mainWidget.resize(self.width, self.height)
         self.mainWidget.setMinimumSize(QtCore.QSize(self.width, self.height))
+
+        self.vBoxLayout = QtWidgets.QVBoxLayout(self.ui.VideoWidget)
+        self.VideoWidget = VideoWidget(self.mainWidget)
+        self.vBoxLayout.addWidget(self.VideoWidget)
 
         # 关闭事件
         self.mainWidget.closeEvent = self.closeEvent
