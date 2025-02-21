@@ -8,12 +8,19 @@ from Util.BSearch import bSearchL, bSearchR
 class TypeDataList:
     """
         @param t_type 数据类型
-        @param unixTimestamp 时间戳
     """
-    def __init__(self, t_type: str, unixTimestamp: list) -> None:
+    def __init__(self, t_type: str) -> None:
         self.type = t_type
-        self.unixTimestamp = unixTimestamp
-        self.listLen = len(self.unixTimestamp)
+        self.timestamp = []
+        self.listLen = 0
+
+    """
+        载入数据
+        @param timestamp 时间戳
+    """
+    def loadData(self, timestamp: list) -> None:
+        self.timestamp = timestamp
+        self.listLen = len(self.timestamp)
 
     """
         检测数据长度是否正确
@@ -37,9 +44,9 @@ class TypeDataList:
     def getRangeIndex(self, start: int, end: int) -> int:
         # 大于等于 start
         def __GES(mid: int) -> bool:
-            return self.unixTimestamp[mid] >= start
+            return self.timestamp[mid] >= start
         # 小于等于 end
         def __LEE(mid: int) -> bool:
-            return self.unixTimestamp[mid] <= end
+            return self.timestamp[mid] <= end
 
         return bSearchL(0, self.listLen - 1, __GES), bSearchR(0, self.listLen - 1, __LEE)
