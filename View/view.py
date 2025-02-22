@@ -45,6 +45,26 @@ class View:
 
         # 关闭事件
         self.mainWidget.closeEvent = self.closeEvent
+        # 设置模式
+        self.StandbyMode()
+
+    """
+        待机模式
+        文件设置与开始可用
+    """
+    def StandbyMode(self) -> None:
+        self.ui.TagFolderWidget.setEnabled(True)
+        self.ui.TagSetWidget.setEnabled(False)
+        self.ui.SetWidget.setEnabled(False)
+
+    """
+        运行模式
+        标签与图表设置可用
+    """
+    def RunningMode(self) -> None:
+        self.ui.TagFolderWidget.setEnabled(False)
+        self.ui.TagSetWidget.setEnabled(True)
+        self.ui.SetWidget.setEnabled(True)
 
     """
         执行
