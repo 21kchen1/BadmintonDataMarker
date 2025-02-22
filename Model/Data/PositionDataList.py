@@ -1,15 +1,15 @@
 from Model.Data.TypeDataList import TypeDataList
 
 """
-    PICTURE 数据列表
+    POSITION 数据列表
     @author chen
 """
 
-class PictureDataList(TypeDataList):
-    TYPE = "PICTURE"
+class PositionDataList(TypeDataList):
+    TYPE = "POSITION"
 
     def __init__(self) -> None:
-        super().__init__(PictureDataList.TYPE)
+        super().__init__(PositionDataList.TYPE)
 
     def loadData(self, timestamp: list, *values: list) -> None:
         super().loadData(timestamp)

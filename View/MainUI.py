@@ -627,7 +627,7 @@ class Ui_DataMarker(object):
 
     def retranslateUi(self, DataMarker):
         _translate = QtCore.QCoreApplication.translate
-        DataMarker.setWindowTitle(_translate("DataMarker", "Form"))
+        DataMarker.setWindowTitle(_translate("DataMarker", "DataMarker"))
         self.ProgressSetLabel.setText(_translate("DataMarker", " Progress Setting"))
         self.PlayButton.setText(_translate("DataMarker", "Play"))
         self.label.setText(_translate("DataMarker", "Step (ms)"))
