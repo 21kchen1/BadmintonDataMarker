@@ -1,6 +1,7 @@
 import logging
 import os
 import pandas as pd
+from Resources.String import FileEndName
 
 """
     数据读取服务
@@ -9,7 +10,6 @@ import pandas as pd
 """
 
 class DataLoad:
-    FILE_CSV = ".csv"
 
     """
         设置字典，决定后续读取的数据类型
@@ -44,7 +44,7 @@ class DataLoad:
             # 根据数据类型载入数据
             for key, dataModel in self.modelDict.items():
                 for filePath in filePaths:
-                    if not filePath.endswith(key + DataLoad.FILE_CSV):
+                    if not filePath.endswith(key + FileEndName.CSV):
                         continue
                     data = pd.read_csv(filePath)
                     # 读取除了第一列的数据
