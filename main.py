@@ -1,3 +1,6 @@
+from Controller.SelectFolderController import SelectFolderController
+from Service.DataLoad import DataLoad
+from Service.DataSave import DataSave
 from View.View import View
 from Model.Data import (
     AcceDataList, AudioDataList, GyroDataList, GyroUDataList,
@@ -26,6 +29,14 @@ MODEL_DICT = {
 
 def main() -> None:
     view = View(2200, 1200)
+
+    # 数据载入服务
+    dataLoader = DataLoad(MODEL_DICT)
+    # 数据保存服务
+    dataSaver = DataSave()
+
+    selectFolderController = SelectFolderController(dataLoader, dataSaver, view)
+    selectFolderController.setSlot()
 
     view.run()
 

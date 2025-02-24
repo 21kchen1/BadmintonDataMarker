@@ -12,11 +12,9 @@ from Resources.String import FileEndName
 class DataSave:
 
     """
-        设置字典，决定后续读取的数据类型
-        @param modelDict 模型类型与实例字典
+        数据集创建，单元保存与删除
     """
-    def __init__(self, modelDict: dict) -> None:
-        self.modelDict = modelDict
+    def __init__(self) -> None:
         self.storePath = None
 
     """

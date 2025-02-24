@@ -46,14 +46,23 @@ class View:
         # 关闭事件
         self.mainWidget.closeEvent = self.closeEvent
         # 设置模式
-        self.StandbyMode()
+        self.standbyMode()
 
     """
         待机模式
         文件设置与开始可用
     """
-    def StandbyMode(self) -> None:
+    def standbyMode(self) -> None:
         self.ui.TagFolderWidget.setEnabled(True)
+        self.ui.TagSetWidget.setEnabled(False)
+        self.ui.SetWidget.setEnabled(False)
+
+    """
+        载入模式
+        全部禁用
+    """
+    def loadMode(self) -> None:
+        self.ui.TagFolderWidget.setEnabled(False)
         self.ui.TagSetWidget.setEnabled(False)
         self.ui.SetWidget.setEnabled(False)
 
@@ -61,10 +70,23 @@ class View:
         运行模式
         标签与图表设置可用
     """
-    def RunningMode(self) -> None:
+    def runningMode(self) -> None:
         self.ui.TagFolderWidget.setEnabled(False)
         self.ui.TagSetWidget.setEnabled(True)
         self.ui.SetWidget.setEnabled(True)
+
+    """
+        文件夹路径设置
+    """
+    def selectFolder(self) -> str:
+        return QtWidgets.QFileDialog.getExistingDirectory(self.mainWidget, "Select Folder")
+
+    """
+        错误窗口
+        @param info 信息
+    """
+    def errorShow(self, info: str) -> None:
+        QtWidgets.QMessageBox.critical(self.mainWidget, "Error", f" {info} ")
 
     """
         执行
