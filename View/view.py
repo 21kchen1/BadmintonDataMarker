@@ -1,3 +1,4 @@
+from Resources import Integer
 from View.MainUI import Ui_DataMarker
 from View.VideoWidget import VideoWidget
 from PyQt5 import QtWidgets, QtCore
@@ -9,6 +10,9 @@ import sys
 """
 
 class View:
+    # 进度条最大值
+    PROC_MAX = Integer.View.PROC_MAX
+
     """
         初始化界面
         @param width 宽度
@@ -38,10 +42,13 @@ class View:
         self.ui.setupUi(self.mainWidget)
         self.mainWidget.resize(self.width, self.height)
         self.mainWidget.setMinimumSize(QtCore.QSize(self.width, self.height))
-
         self.vBoxLayout = QtWidgets.QVBoxLayout(self.ui.VideoWidget)
         self.VideoWidget = VideoWidget(self.mainWidget)
+        self.VideoWidget.setProgressMax(View.PROC_MAX)
         self.vBoxLayout.addWidget(self.VideoWidget)
+
+        # 计时器
+        self.timer = QtCore.QTimer(self.mainWidget)
 
         # 关闭事件
         self.mainWidget.closeEvent = self.closeEvent
@@ -80,6 +87,19 @@ class View:
     """
     def selectFolder(self) -> str:
         return QtWidgets.QFileDialog.getExistingDirectory(self.mainWidget, "Select Folder")
+
+    """
+        设置计时器
+        @param msec 间隔
+    """
+    def setTimer(self, msec: int) -> None:
+        self.timer.start(msec)
+
+    """
+        停止计时器
+    """
+    def stopTimer(self) -> None:
+        self.timer.stop()
 
     """
         错误窗口

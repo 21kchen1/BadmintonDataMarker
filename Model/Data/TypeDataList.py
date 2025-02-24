@@ -23,6 +23,12 @@ class TypeDataList:
         self.listLen = len(self.timestamp)
 
     """
+        数据处理
+    """
+    def procData(self) -> None:
+        pass
+
+    """
         检测数据长度是否正确
         @param dataLists 若干个数据列表
         @return 这几个列表长度是否正确

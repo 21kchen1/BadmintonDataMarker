@@ -5,6 +5,7 @@ import cv2
 """
     图像组件
     显示传入图像
+    @author chen
 """
 class ImageWidget(QtWidgets.QWidget):
     def __init__(self, parent= None) -> None:
@@ -32,13 +33,11 @@ class ImageWidget(QtWidgets.QWidget):
 
         qp.end()
 
-
 """
     视频组件
     显示传入的图像并显示视频进度
     @author: chen
 """
-
 class VideoWidget(QtWidgets.QWidget):
     """
         初始化
@@ -68,6 +67,20 @@ class VideoWidget(QtWidgets.QWidget):
     """
     def setImage(self, image: QtGui.QImage) -> None:
         self.ImageWidget.setImage(image)
+
+    """
+        设置进度条最大值
+        @param maxi 最大值
+    """
+    def setProgressMax(self, maxi: int) -> None:
+        self.ProgressBar.setMaximum(maxi)
+
+    """
+        设置进度
+        @param value 百分比
+    """
+    def setProgress(self, value: float) -> None:
+        self.ProgressBar.setValue(int(value * self.ProgressBar.maximum()))
 
 """
     测试

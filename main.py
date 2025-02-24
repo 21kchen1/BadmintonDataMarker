@@ -1,6 +1,8 @@
-from Controller.SelectFolderController import SelectFolderController
+from Controller.DataLoadController import DataLoadController
+from Controller.DataShowController import DataShowController
 from Service.DataLoad import DataLoad
 from Service.DataSave import DataSave
+from Service.DataShow import DataShow
 from View.View import View
 from Model.Data import (
     AcceDataList, AudioDataList, GyroDataList, GyroUDataList,
@@ -32,11 +34,17 @@ def main() -> None:
 
     # 数据载入服务
     dataLoader = DataLoad(MODEL_DICT)
+    # 数据显示服务
+    dataShower = DataShow(MODEL_DICT)
     # 数据保存服务
     dataSaver = DataSave()
 
-    selectFolderController = SelectFolderController(dataLoader, dataSaver, view)
-    selectFolderController.setSlot()
+    # 数据载入控制器
+    dataLoadController = DataLoadController(dataLoader, dataSaver, view)
+    dataLoadController.setSlot()
+    # 数据显示控制器
+    dataShowController = DataShowController(dataShower, view)
+    dataShowController.setSlot()
 
     view.run()
 

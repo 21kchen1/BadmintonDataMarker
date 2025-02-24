@@ -4,12 +4,12 @@ from Service.DataSave import DataSave
 from View.View import View
 
 """
-    选择文件控制器
-    负责 View 的 SelectFolder 部分
+    数据载入控制器
+    负责 View 的 DataLoad 部分
     @author chen
 """
 
-class SelectFolderController:
+class DataLoadController:
     """
         @param dataLoad 数据载入服务
         @param dataSave 数据保存服务
@@ -53,6 +53,9 @@ class SelectFolderController:
         self.dataSave.createSave(self.rootPath)
         self.view.runningMode()
         self.rootPath = None
+        # 触发 Show 相关的槽函数
+        self.view.ui.TimeSpinBox.setValue(1)
+        self.view.ui.TimeSpinBox.setValue(0)
 
     """
         设置槽函数
