@@ -1,4 +1,5 @@
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     POSITION 数据列表
@@ -6,7 +7,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class PositionDataList(TypeDataList):
-    TYPE = "POSITION"
+    TYPE = DataType.POSITION
 
     def __init__(self) -> None:
         super().__init__(PositionDataList.TYPE)

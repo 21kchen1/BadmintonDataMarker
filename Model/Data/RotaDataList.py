@@ -1,5 +1,6 @@
 
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     RotationVector 数据列表·
@@ -7,7 +8,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class RotaDataList(TypeDataList):
-    TYPE = "ROTATION_VECTOR"
+    TYPE = DataType.ROTA
 
     def __init__(self) -> None:
         super().__init__(RotaDataList.TYPE)

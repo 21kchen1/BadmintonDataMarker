@@ -1,4 +1,5 @@
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     MagneticField 数据列表
@@ -6,7 +7,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class MagnDataList(TypeDataList):
-    TYPE = "MAGNETIC_FIELD"
+    TYPE = DataType.MAGN
 
     def __init__(self) -> None:
         super().__init__(MagnDataList.TYPE)

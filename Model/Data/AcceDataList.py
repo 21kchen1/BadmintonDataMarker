@@ -1,4 +1,5 @@
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     Accelerometer 数据列表
@@ -7,7 +8,7 @@ from Model.Data.TypeDataList import TypeDataList
 
 class AcceDataList(TypeDataList):
     # 类型标识
-    TYPE = "ACCELEROMETER"
+    TYPE = DataType.ACCE
 
     def __init__(self) -> None:
         super().__init__(AcceDataList.TYPE)

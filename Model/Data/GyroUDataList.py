@@ -1,4 +1,5 @@
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     GyroscopeU 数据列表
@@ -6,7 +7,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class GyroUDataList(TypeDataList):
-    TYPE = "GYROSCOPE_UNCALIBRATED"
+    TYPE = DataType.GYRO_U
 
     def __init__(self) -> None:
         super().__init__(GyroUDataList.TYPE)

@@ -1,4 +1,5 @@
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     MagneticFieldU 数据列表
@@ -6,7 +7,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class MagnUDataList(TypeDataList):
-    TYPE = "MAGNETIC_FIELD_UNCALIBRATED"
+    TYPE = DataType.MAGN_U
 
     def __init__(self) -> None:
         super().__init__(MagnUDataList.TYPE)

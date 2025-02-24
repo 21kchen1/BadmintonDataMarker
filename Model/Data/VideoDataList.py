@@ -1,5 +1,5 @@
-
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     Video 数据列表
@@ -7,7 +7,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class VideoDataList(TypeDataList):
-    TYPE = "VIDEO"
+    TYPE = DataType.VIDEO
 
     def __init__(self) -> None:
         super().__init__(VideoDataList.TYPE)

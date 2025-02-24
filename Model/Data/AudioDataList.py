@@ -1,4 +1,5 @@
 from Model.Data.TypeDataList import TypeDataList
+from Resources.String import DataType
 
 """
     Audio 数据列表
@@ -6,7 +7,7 @@ from Model.Data.TypeDataList import TypeDataList
 """
 
 class AudioDataList(TypeDataList):
-    TYPE = "AUDIO"
+    TYPE = DataType.AUDIO
 
     def __init__(self) -> None:
         super().__init__(AudioDataList.TYPE)
