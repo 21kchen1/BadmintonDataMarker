@@ -22,6 +22,10 @@ class DataLoadController:
         self.rootPath = None
 
     """
+        槽函数
+    """
+
+    """
         选择文件夹
         测试文件路径并显示于视图
     """
@@ -30,7 +34,7 @@ class DataLoadController:
         rootPath = self.view.selectFolder()
         # 检测路径
         if not self.dataSave.checkPath(rootPath):
-            self.view.errorShow(ErrorInfo.selcetFolder)
+            self.view.errorShow(ErrorInfo.SELECT_FOLDER)
             return
         self.rootPath = rootPath
         self.view.ui.TagFolderLineEdit.setText(f" {self.rootPath} ")
@@ -41,12 +45,12 @@ class DataLoadController:
     """
     def startProcess(self) -> None:
         if not self.rootPath:
-            self.view.errorShow(ErrorInfo.dataLoadPath)
+            self.view.errorShow(ErrorInfo.DATALOAD_PATH)
             return
         # 数据载入
         self.view.loadMode()
         if not self.dataLoad.loadData(self.rootPath):
-            self.view.errorShow(ErrorInfo.dataLoad)
+            self.view.errorShow(ErrorInfo.DATALOAD)
             self.view.standbyMode()
             return
         # 创建数据文件
@@ -56,6 +60,7 @@ class DataLoadController:
         # 触发 Show 相关的槽函数
         self.view.ui.TimeSpinBox.setValue(1)
         self.view.ui.TimeSpinBox.setValue(0)
+        self.view.ui.ApplyButton.click()
 
     """
         设置槽函数

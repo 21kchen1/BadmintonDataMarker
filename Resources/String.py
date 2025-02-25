@@ -1,5 +1,7 @@
 
-
+"""
+    与数据模型相关的字符串
+"""
 class DataType:
     ACCE = "ACCELEROMETER"
     ACCE_U = "ACCELEROMETER_UNCALIBRATED"
@@ -12,18 +14,42 @@ class DataType:
     ROTA = "ROTATION_VECTOR"
     VIDEO = "VIDEO"
 
+"""
+    与文件尾相关的字符串
+"""
 class FileEndName:
     CSV = ".csv"
     JSON = ".json"
 
+"""
+    与错误窗口相关的字符串
+"""
 class ErrorInfo:
-    selcetFolder = "Folder exception."
-    dataLoadPath = "Data Load path exception."
-    dataLoad = "Data Load exception."
+    SELECT_FOLDER = "Folder exception."
+    DATALOAD_PATH = "Data Load path exception."
+    DATALOAD = "Data Load exception."
 
+"""
+    与编码相关的字符串
+"""
 class Encoding:
     UTF8 = "utf-8"
 
+"""
+    与图表显示相关的字符串
+"""
 class Graph:
-    XLabel = "Timestamp (ms)"
-    YLabel = "Value"
+    X_LABEL = "Timestamp (ms)"
+    Y_LABEL = "Value"
+
+"""
+    与按钮相关的字符串
+"""
+class Button:
+    ACCE_RADIO = "AcceRadio"
+    GYRO_RADIO = "GyroRadio"
+    ROTATE_RADIO = "RotateRadio"
+
+    X_CHECK = "XCheck"
+    Y_CHECK = "YCheck"
+    Z_CHECK = "ZCheck"

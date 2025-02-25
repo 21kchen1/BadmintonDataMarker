@@ -1,4 +1,6 @@
+from os import name
 from Resources import Integer
+from Resources.String import Button
 from View.MainUI import Ui_DataMarker
 from View.VideoWidget import VideoWidget
 from View.GraphWidget import GraphWidget
@@ -18,6 +20,13 @@ matplotlib.rcParams['font.size'] = 20
 class View:
     # 进度条最大值
     PROC_MAX = Integer.View.PROC_MAX
+    # 选择按钮名称
+    ACCE_RADIO = Button.ACCE_RADIO
+    GYRO_RADIO = Button.GYRO_RADIO
+    ROTATE_RADIO = Button.ROTATE_RADIO
+    X_CHECK = Button.X_CHECK
+    Y_CHECK = Button.Y_CHECK
+    Z_CHECK = Button.Z_CHECK
 
     """
         初始化界面
