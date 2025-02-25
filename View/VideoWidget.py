@@ -82,6 +82,13 @@ class VideoWidget(QtWidgets.QWidget):
     def setProgress(self, value: float) -> None:
         self.ProgressBar.setValue(int(value * self.ProgressBar.maximum()))
 
+    """
+        清除图像与进度
+    """
+    def clean(self) -> None:
+        self.ProgressBar.setValue(0)
+        self.setImage(None)
+
 """
     测试
 """

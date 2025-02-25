@@ -2,6 +2,7 @@ import sys
 import time
 sys.path.append("../")
 
+from Resources.String import DataType
 from Service.DataShow import DataShow
 from Service.DataLoad import DataLoad
 import Main
@@ -39,14 +40,14 @@ if __name__ == "__main__":
     loadService = DataLoad(Main.MODEL_DICT)
     showService = DataShow(Main.MODEL_DICT)
     bef = time.time()
-    loadService.loadData(L)
+    loadService.loadData(S)
 
-
+    print(showService.getTypeDataValue(DataType.GYRO, 1, 901, 1000)[1])
     # 创建 PyQt 应用
     app = QApplication(sys.argv)
 
     # 创建窗口并显示图像
-    window = ImageDisplayWidget(showService.getVideoQImage(15000))
+    window = ImageDisplayWidget(showService.getVideoQImage(15000)[0])
     print(time.time() - bef)
     window.show()
 

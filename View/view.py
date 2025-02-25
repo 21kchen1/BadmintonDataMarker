@@ -1,8 +1,14 @@
 from Resources import Integer
 from View.MainUI import Ui_DataMarker
 from View.VideoWidget import VideoWidget
+from View.GraphWidget import GraphWidget
 from PyQt5 import QtWidgets, QtCore
 import sys
+import matplotlib
+
+# 设置图标字体
+matplotlib.rcParams['font.family'] = 'Consolas'
+matplotlib.rcParams['font.size'] = 20
 
 """
     视图，显示 GUI
@@ -41,11 +47,15 @@ class View:
     def uiInit(self) -> None:
         self.ui.setupUi(self.mainWidget)
         self.mainWidget.resize(self.width, self.height)
-        self.mainWidget.setMinimumSize(QtCore.QSize(self.width, self.height))
-        self.vBoxLayout = QtWidgets.QVBoxLayout(self.ui.VideoWidget)
+        # 设置视频窗口
+        self.VideoLayout = QtWidgets.QVBoxLayout(self.ui.VideoWidget)
         self.VideoWidget = VideoWidget(self.mainWidget)
         self.VideoWidget.setProgressMax(View.PROC_MAX)
-        self.vBoxLayout.addWidget(self.VideoWidget)
+        self.VideoLayout.addWidget(self.VideoWidget)
+        # 设置图表窗口
+        self.GraphLayout = QtWidgets.QVBoxLayout(self.ui.GraphWidget)
+        self.GraphWidget = GraphWidget(self.mainWidget)
+        self.GraphLayout.addWidget(self.GraphWidget)
 
         # 计时器
         self.timer = QtCore.QTimer(self.mainWidget)

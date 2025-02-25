@@ -1,9 +1,9 @@
 import sys
 import time
 sys.path.append("../")
+from Resources.String import DataType
 from Service.DataLoad import DataLoad
 import Main
-import cv2
 
 testService = DataLoad(Main.MODEL_DICT)
 
@@ -19,5 +19,5 @@ for key, model in Main.MODEL_DICT.items():
     for name, value in model.__dict__.items():
         print(f"{name} : {value}")
 
-cv2.imshow("1", testService.modelDict["VIDEO"].values[0])
-cv2.waitKey(0)
+print()
+print(Main.MODEL_DICT[DataType.ACCE].getValuesByIndex(0))

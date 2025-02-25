@@ -51,11 +51,38 @@ class DataShow:
                 self.getTypePercent(DataType.VIDEO, index)
 
     """
-        根据时间戳获取范围数据
-        @param type 数据类型
-        @param attr 属性下标
-        @param start 起点
-        @param end 终点
+        根据时间戳获取范围时间戳
+        @param dataType 数据类型
+        @param start 起点时间戳
+        @param end 终点时间戳
         @return list 时间戳
+    """
+    def getTypeDataTimestamp(self, dataType: str, start: int, end: int) -> list:
+        # 获取数据类型
+        typeData = self.modelDict.get(dataType)
+        if not typeData:
+            return None
+        # 获取时间戳
+        timestampList = typeData.timestamp
+        # 获取下标
+        sIndex, eIndex = typeData.getRangeIndex(start, end)
+        return timestampList[sIndex : eIndex + 1]
+
+    """
+        根据时间戳获取范围数据
+        @param dataType 数据类型
+        @param dataValue 属性值下标
+        @param start 起点时间戳
+        @param end 终点时间戳
         @return list 数值
     """
+    def getTypeDataValue(self, dataType: str, dataValue: int, start: int, end: int) -> list:
+        # 获取数据类型
+        typeData = self.modelDict.get(dataType)
+        if not typeData:
+            return None
+        # 获取属性值
+        valueList = typeData.getValuesByIndex(dataValue)
+        # 获取下标
+        sIndex, eIndex = typeData.getRangeIndex(start, end)
+        return valueList[sIndex : eIndex + 1]

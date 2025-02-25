@@ -12,12 +12,17 @@ class GyroUDataList(TypeDataList):
     def __init__(self) -> None:
         super().__init__(GyroUDataList.TYPE)
 
-    def loadData(self, timestamp: list, sensorTimestamp: list, *values: list) -> None:
-        super().loadData(timestamp)
+    """
+        @param timestamp 系统时间戳
+        @param sensorTimestamp 硬件时间戳
+        @param valueLists 坐标轴列表
+    """
+    def loadData(self, timestamp: list, sensorTimestamp: list, *valueLists: list) -> None:
+        super().loadData(timestamp, len(valueLists))
         self.sensorTimestamp = sensorTimestamp
-        self.angularSpeedX = values[0]
-        self.angularSpeedY = values[1]
-        self.angularSpeedZ = values[2]
-        self.angularSpeedXDrift = values[3]
-        self.angularSpeedYDrift = values[4]
-        self.angularSpeedZDrift = values[5]
+        self.angularSpeedX = valueLists[0]
+        self.angularSpeedY = valueLists[1]
+        self.angularSpeedZ = valueLists[2]
+        self.angularSpeedXDrift = valueLists[3]
+        self.angularSpeedYDrift = valueLists[4]
+        self.angularSpeedZDrift = valueLists[5]

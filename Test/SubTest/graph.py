@@ -1,12 +1,16 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
+import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+
+matplotlib.rcParams['font.family'] = 'Consolas'
+matplotlib.rcParams['font.size'] = 20
 
 class MatplotlibWidget(QWidget):
     def __init__(self, parent=None):
         super(MatplotlibWidget, self).__init__(parent)
-        self.setWindowTitle("Matplotlib 折线图示例")
+        self.setWindowTitle("Matplotlib")
         self.resize(600, 400)
 
         # 创建 matplotlib 图形
@@ -30,9 +34,10 @@ class MatplotlibWidget(QWidget):
         # 创建新的图形
         ax = self.figure.add_subplot(111)
         ax.plot(data, marker='o', linestyle='-')
-        ax.set_title("折线图示例")
-        ax.set_xlabel("X 轴")
-        ax.set_ylabel("Y 轴")
+        ax.plot([da + 5 for da in data], marker='o', linestyle='--')
+        ax.set_title("example")
+        ax.set_xlabel("X aixs")
+        ax.set_ylabel("Y aixs")
 
         # 刷新 canvas
         self.canvas.draw()

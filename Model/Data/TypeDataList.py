@@ -6,8 +6,6 @@ from Util.BSearch import bSearchL, bSearchR
 """
 
 class TypeDataList:
-
-
     """
         @param t_type 数据类型
     """
@@ -19,10 +17,12 @@ class TypeDataList:
     """
         载入数据
         @param timestamp 时间戳
+        @param valueNum 值数量
     """
-    def loadData(self, timestamp: list) -> None:
+    def loadData(self, timestamp: list, valueNum= 0) -> None:
         self.timestamp = timestamp
         self.listLen = len(self.timestamp)
+        self.valueNum = valueNum
 
     """
         数据处理
@@ -46,10 +46,11 @@ class TypeDataList:
         通过时间戳范围获取下标
         @param start 起点时间戳
         @param end 终点时间戳
-        @return 大于等于 start 的时间戳下标
-        @return 小于等于 end 的时间戳下标
+        @return int 大于等于 start 的时间戳下标
+        @return int 小于等于 end 的时间戳下标
     """
     def getRangeIndex(self, start: int, end: int) -> int:
+        if start > end: return 0
         # 大于等于 start
         def __GES(mid: int) -> bool:
             return self.timestamp[mid] >= start
@@ -58,3 +59,15 @@ class TypeDataList:
             return self.timestamp[mid] <= end
 
         return bSearchL(0, self.listLen - 1, __GES), bSearchR(0, self.listLen - 1, __LEE)
+
+    """
+        通过数字下标获取属性值
+        @param index 数字下标
+        @return list 值列表
+    """
+    def getValuesByIndex(self, index: int) -> list:
+        if index >= self.valueNum:
+            return None
+        attrList = list(self.__dict__.keys())
+        index = len(attrList) - self.valueNum + index
+        return getattr(self, attrList[index])

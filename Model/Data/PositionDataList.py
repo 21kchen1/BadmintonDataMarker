@@ -12,7 +12,11 @@ class PositionDataList(TypeDataList):
     def __init__(self) -> None:
         super().__init__(PositionDataList.TYPE)
 
-    def loadData(self, timestamp: list, *values: list) -> None:
-        super().loadData(timestamp)
-        self.xPosition = values[0]
-        self.yPosition = values[1]
+    """
+        @param timestamp 系统时间戳
+        @param valueLists 坐标轴列表
+    """
+    def loadData(self, timestamp: list, *valueLists: list) -> None:
+        super().loadData(timestamp, len(valueLists))
+        self.xPosition = valueLists[0]
+        self.yPosition = valueLists[1]

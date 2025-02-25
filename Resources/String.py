@@ -1,4 +1,5 @@
 
+
 class DataType:
     ACCE = "ACCELEROMETER"
     ACCE_U = "ACCELEROMETER_UNCALIBRATED"
@@ -22,3 +23,7 @@ class ErrorInfo:
 
 class Encoding:
     UTF8 = "utf-8"
+
+class Graph:
+    XLabel = "Timestamp (ms)"
+    YLabel = "Value"

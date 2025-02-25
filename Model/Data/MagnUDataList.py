@@ -12,12 +12,17 @@ class MagnUDataList(TypeDataList):
     def __init__(self) -> None:
         super().__init__(MagnUDataList.TYPE)
 
-    def loadData(self, timestamp: list, sensorTimestamp: list, *values: list) -> None:
-        super().loadData(timestamp)
+    """
+        @param timestamp 系统时间戳
+        @param sensorTimestamp 硬件时间戳
+        @param valueLists 坐标轴列表
+    """
+    def loadData(self, timestamp: list, sensorTimestamp: list, *valueLists: list) -> None:
+        super().loadData(timestamp, len(valueLists))
         self.sensorTimestamp = sensorTimestamp
-        self.magneticFieldX = values[0]
-        self.magneticFieldY = values[1]
-        self.magneticFieldZ = values[2]
-        self.magneticFieldXBias = values[3]
-        self.magneticFieldYBias = values[4]
-        self.magneticFieldZBias = values[5]
+        self.magneticFieldX = valueLists[0]
+        self.magneticFieldY = valueLists[1]
+        self.magneticFieldZ = valueLists[2]
+        self.magneticFieldXBias = valueLists[3]
+        self.magneticFieldYBias = valueLists[4]
+        self.magneticFieldZBias = valueLists[5]

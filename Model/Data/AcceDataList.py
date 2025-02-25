@@ -14,12 +14,12 @@ class AcceDataList(TypeDataList):
         super().__init__(AcceDataList.TYPE)
 
     """
-        @param unixTimestamp 系统时间戳
+        @param timestamp 系统时间戳
         @param sensorTimestamp 硬件时间戳
         @param valueLists 坐标轴列表
     """
     def loadData(self, timestamp: list, sensorTimestamp: list, *valueLists: list) -> None:
-        super().loadData(timestamp)
+        super().loadData(timestamp, len(valueLists))
         self.sensorTimestamp = sensorTimestamp
         self.Gx = valueLists[0]
         self.Gy = valueLists[1]

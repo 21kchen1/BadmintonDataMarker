@@ -19,7 +19,7 @@ class AcceUDataList(TypeDataList):
         @param valueLists 坐标轴列表
     """
     def loadData(self, timestamp: list, sensorTimestamp: list, *valueLists: list) -> None:
-        super().loadData(timestamp)
+        super().loadData(timestamp, len(valueLists))
         self.sensorTimestamp = sensorTimestamp
         self.Gx = valueLists[0]
         self.Gy = valueLists[1]

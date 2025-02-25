@@ -16,16 +16,16 @@ class VideoDataList(TypeDataList):
         super().__init__(VideoDataList.TYPE)
 
     """
-        @param unixTimestamp 系统时间戳
+        @param ttimestamp 系统时间戳
         @param width 视频宽度
         @param height 视频高度
         @param values 视频数据
     """
-    def loadData(self, timestamp: list, width: list, height: list, *values: list) -> None:
-        super().loadData(timestamp)
+    def loadData(self, timestamp: list, width: list, height: list, *valueLists: list) -> None:
+        super().loadData(timestamp, len(valueLists))
         self.width = width
         self.height = height
-        self.values = values[0]
+        self.values = valueLists[0]
 
     """
         将字符串数据转换为 opencv 图像
