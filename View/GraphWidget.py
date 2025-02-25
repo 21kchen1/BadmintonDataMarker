@@ -54,7 +54,7 @@ class GraphWidget(QWidget):
         ax.set_xlabel(Graph.X_LABEL)
         ax.set_ylabel(Graph.Y_LABEL)
         ax.tick_params(axis='both', labelsize= matplotlib.rcParams['font.size'] / 3 * 2)
-        ax.legend()
+        ax.legend(loc='upper left')
         # 刷新
         self.canvas.draw()
 

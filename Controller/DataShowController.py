@@ -38,6 +38,8 @@ class DataShowController:
         self.isPlaying = False
         # 当前时间戳
         self.nowTimestamp = 0
+        # 当前进度
+        self.nowProcess = 0
         # 当前数据类型
         self.nowDataType = None
         # 当前属性列表
@@ -131,9 +133,9 @@ class DataShowController:
         # 获取当前时间戳
         self.nowTimestamp = self.view.ui.TimeSpinBox.value()
         # 获取图像与进度
-        image, percent = self.dataShow.getVideoQImage(self.nowTimestamp)
+        image, self.nowProcess = self.dataShow.getVideoQImage(self.nowTimestamp)
         self.view.VideoWidget.setImage(image)
-        self.view.VideoWidget.setProgress(percent)
+        self.view.VideoWidget.setProgress(self.nowProcess)
         # 更新图表
         self.showGraph()
 
@@ -173,6 +175,10 @@ class DataShowController:
         控制数据的持续播放
     """
     def playLoop(self) -> None:
+        # 如果播放完成
+        if self.nowProcess >= 1:
+            self.stopData()
+            return
         # 步长
         step = self.view.ui.StepSpinBox.value()
         # 改变时间戳
