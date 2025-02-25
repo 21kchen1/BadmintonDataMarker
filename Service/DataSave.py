@@ -4,9 +4,11 @@
     @author chen
 """
 
+import json
+import logging
 import os
 
-from Resources.String import FileEndName
+from Resources.String import FileEndName, Encoding
 
 
 class DataSave:
@@ -41,6 +43,33 @@ class DataSave:
             return False
         # 存储路径
         self.storePath = rootPath + FileEndName.JSON
-        with open(self.storePath, "w", newline= "", encoding= "utf-8") as _:
-            pass
+        # 以数组形式存储数据
+        with open(self.storePath, "w", newline= "", encoding= Encoding.UTF8) as file:
+            json.dump([], file, ensure_ascii= False, indent= 4)
+        return True
+
+    """
+        向存储文件尾部添加数据单元
+        @param dataUnit 数据单元 dict
+    """
+    def saveDataUnit(self, dataUnit: dict) -> bool:
+        # 存储路径异常
+        if not self.storePath or not os.path.exists(self.storePath):
+            return False
+
+        # 读取数据
+        try:
+            with open(self.storePath, "r", newline= "", encoding= Encoding.UTF8) as file:
+                dataSet = json.load(file)
+        except Exception as e:
+            logging.error(e)
+            return False
+
+        if not isinstance(dataSet, list):
+            return False
+        # 添加数据
+        dataSet.append(dataUnit)
+        # 存储数据
+        with open(self.storePath, "w", encoding= Encoding.UTF8) as file:
+            json.dump(dataSet, file, ensure_ascii= False, indent= 4)
         return True

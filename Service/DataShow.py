@@ -29,8 +29,11 @@ class DataShow:
         根据时间戳获取最接近的图像
         @param timestamp 时间戳
         @return QImage 图像
+        @return float 进度百分比
     """
     def getVideoQImage(self, timestamp: int) -> QImage:
+        if not self.modelDict.get(DataType.VIDEO):
+            return None, None
         # 获取图像数据
         index, _ = self.modelDict[DataType.VIDEO].getRangeIndex(timestamp, timestamp)
         values = self.modelDict[DataType.VIDEO].values[index]
@@ -46,3 +49,13 @@ class DataShow:
         bytes_per_line = 3 * width
         return QImage(image.data, width, height, bytes_per_line, QImage.Format_RGB888).rgbSwapped(), \
                 self.getTypePercent(DataType.VIDEO, index)
+
+    """
+        根据时间戳获取范围数据
+        @param type 数据类型
+        @param attr 属性下标
+        @param start 起点
+        @param end 终点
+        @return list 时间戳
+        @return list 数值
+    """

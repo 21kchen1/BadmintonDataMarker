@@ -6,6 +6,8 @@ from Util.BSearch import bSearchL, bSearchR
 """
 
 class TypeDataList:
+
+
     """
         @param t_type 数据类型
     """

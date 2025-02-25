@@ -19,3 +19,6 @@ class ErrorInfo:
     selcetFolder = "Folder exception."
     dataLoadPath = "Data Load path exception."
     dataLoad = "Data Load exception."
+
+class Encoding:
+    UTF8 = "utf-8"
