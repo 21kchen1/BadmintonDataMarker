@@ -54,13 +54,10 @@ class DataLoadController:
             self.view.standbyMode()
             return
         # 创建数据文件
-        self.dataSave.createSave(self.rootPath)
+        ################################################################################################
+        # self.dataSave.createSave(self.rootPath)
         self.view.runningMode()
         self.rootPath = None
-        # 触发 Show 相关的槽函数
-        self.view.ui.TimeSpinBox.setValue(1)
-        self.view.ui.TimeSpinBox.setValue(0)
-        self.view.ui.ApplyButton.click()
 
     """
         设置槽函数

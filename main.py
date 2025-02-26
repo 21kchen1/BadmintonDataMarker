@@ -39,6 +39,7 @@ def main() -> None:
     # 数据保存服务
     dataSaver = DataSave()
 
+    # 控制器的生成顺序必须固定
     # 数据载入控制器
     dataLoadController = DataLoadController(dataLoader, dataSaver, view)
     dataLoadController.setSlot()

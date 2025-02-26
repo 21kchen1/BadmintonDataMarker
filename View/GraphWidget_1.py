@@ -8,6 +8,7 @@ sys.path.append("../")
 from Resources.String import Graph
 
 """
+    deprecated 弃用
     图表组件
     将传入的数据显示为图标
     @author chen

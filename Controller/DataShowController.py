@@ -48,38 +48,6 @@ class DataShowController:
         self.nowTimeRange = 0
 
     """
-        功能函数
-    """
-
-    """
-        获取 DataType 设置
-        @return str 选择的数据类型
-    """
-    def getDataTypeSet(self) -> str:
-        for name, dataType in DataShowController.RADIO_TYPE_DICT.items():
-            # 尝试获取按钮
-            button = getattr(self.view.ui, name)
-            # 不存在或未选中
-            if not button or not button.isChecked():
-                continue
-            return dataType
-
-    """
-        获取 Axis 设置
-        return list 选择的数据属性
-    """
-    def getAxisSet(self) -> list:
-        axisList = []
-        for name, axis in DataShowController.CHECK_ATTR_DICT.items():
-            # 尝试获取按钮
-            button = getattr(self.view.ui, name)
-            # 不存在或未选中
-            if not button or not button.isChecked():
-                continue
-            axisList.append(axis)
-        return axisList
-
-    """
         槽函数
     """
 
@@ -98,6 +66,7 @@ class DataShowController:
         timestamp = self.dataShow.getTypeDataTimestamp(self.nowDataType, sIndex, eIndex)
 
         # 标签与数据字典
+        # setPlotLineChart 的 dataDict 参数接收的是 {label: data}
         dataDict = {}
         # 遍历设置并获取数据
         for attr in self.nowAttrList:
@@ -113,16 +82,56 @@ class DataShowController:
         self.view.GraphWidget.setPlotLineChart(self.nowDataType, timestamp, dataDict, self.nowTimestamp, flagRange)
 
     """
+        deprecated 弃用
         Apply Graph 设置
         读取 DataType，Axis 与 数据显示范围
         更新 Graph
     """
     def applyGraphSet(self) -> None:
         # 获取所有属性
-        self.nowDataType = self.getDataTypeSet()
+        self.nowDataType = self.dataTypeSet()
         self.nowAttrList = self.getAxisSet()
         self.nowTimeRange = self.view.ui.RangeSpinBox.value()
         # 更新图表
+        self.showGraph()
+
+    """
+        DataType 设置
+        读取数据并更新图表
+    """
+    def dataTypeSet(self) -> None:
+        # 获取点击的按钮
+        button = self.view.ui.DataTypeGroup.checkedButton()
+        dataType = DataShowController.RADIO_TYPE_DICT.get(button.objectName())
+        # 如果没有对应的类型
+        if not dataType:
+            return
+        self.nowDataType = dataType
+        self.showGraph()
+
+    """
+        Axis 设置
+        读取数据并更新图表
+    """
+    ######################################
+    def axisSet(self) -> None:
+        axisList = []
+        for name, axis in DataShowController.CHECK_ATTR_DICT.items():
+            # 尝试获取按钮
+            button = getattr(self.view.ui, name)
+            # 不存在或未选中
+            if not button or not button.isChecked():
+                continue
+            axisList.append(axis)
+        self.nowAttrList = axisList
+        self.showGraph()
+
+    """
+        Range 设置
+        读取数据并更新图表
+    """
+    def rangeSet(self) -> None:
+        self.nowTimeRange = self.view.ui.RangeSpinBox.value()
         self.showGraph()
 
     """
@@ -185,14 +194,31 @@ class DataShowController:
         self.view.ui.TimeSpinBox.setValue(self.nowTimestamp + step)
 
     """
+        开始处理
+        加载数据并显示图像
+    """
+    def startProcess(self) -> None:
+        # 加载数据
+        self.stepSet()
+        self.dataTypeSet()
+        self.axisSet()
+        self.rangeSet()
+        self.timeSet()
+
+    """
         设置槽函数
     """
     def setSlot(self) -> None:
+        # 时间戳范围调整
         self.view.ui.TimeSpinBox.valueChanged.connect(self.timeSet)
         self.view.ui.StepSpinBox.valueChanged.connect(self.stepSet)
-        # 播放与停止
+        # 视频 播放与停止
         self.view.ui.PlayButton.clicked.connect(self.playData)
         self.view.ui.StopButton.clicked.connect(self.stopData)
         self.view.timer.timeout.connect(self.playLoop)
-        # 图表
-        self.view.ui.ApplyButton.clicked.connect(self.applyGraphSet)
+        # 图表 设置与更新
+        self.view.ui.DataTypeGroup.buttonClicked.connect(self.dataTypeSet)
+        self.view.ui.AxisGroup.buttonClicked.connect(self.axisSet)
+        self.view.ui.RangeSpinBox.valueChanged.connect(self.rangeSet)
+        # 开始
+        self.view.ui.TagStartButton.clicked.connect(self.startProcess)
