@@ -65,6 +65,8 @@ class View:
         self.GraphLayout = QtWidgets.QVBoxLayout(self.ui.GraphWidget)
         self.GraphWidget = GraphWidget(self.mainWidget)
         self.GraphLayout.addWidget(self.GraphWidget)
+        # 隐藏按钮
+        self.ui.StartSucceedButton.setVisible(False)
 
         # 计时器
         self.timer = QtCore.QTimer(self.mainWidget)

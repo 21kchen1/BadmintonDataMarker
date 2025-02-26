@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>866</width>
-    <height>557</height>
+    <height>548</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -649,6 +649,9 @@
                   </sizepolicy>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <property name="spacing">
+                   <number>6</number>
+                  </property>
                   <property name="leftMargin">
                    <number>0</number>
                   </property>
@@ -684,6 +687,29 @@
                     </property>
                     <property name="text">
                      <string>Start</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="StartSucceedButton">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>0</width>
+                      <height>0</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">width: 0;
+</string>
+                    </property>
+                    <property name="text">
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -986,6 +1012,32 @@
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
+                       <property name="editable">
+                        <bool>false</bool>
+                       </property>
+                       <property name="placeholderText">
+                        <string/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>ForehandLob</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>ForehandKill</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>ForehandHigh</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>BackhandTransition</string>
+                        </property>
+                       </item>
                       </widget>
                      </item>
                      <item row="1" column="0">
@@ -1009,6 +1061,21 @@
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
+                       <item>
+                        <property name="text">
+                         <string>Good</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Normal</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Bad</string>
+                        </property>
+                       </item>
                       </widget>
                      </item>
                     </layout>

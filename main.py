@@ -3,11 +3,13 @@ from Controller.DataShowController import DataShowController
 from Service.DataLoad import DataLoad
 from Service.DataSave import DataSave
 from Service.DataShow import DataShow
+from Service.DataTag import DataTag
 from View.View import View
 from Model.Data import (
     AcceDataList, AudioDataList, GyroDataList, GyroUDataList,
     MagnDataList, MagnUDataList, PositionDataList, RotaDataList, VideoDataList,
 )
+from Model.Note import Note
 import logging
 
 # 日志设置
@@ -29,17 +31,36 @@ MODEL_DICT = {
     VideoDataList.VideoDataList.TYPE: VideoDataList.VideoDataList(),
 }
 
+"""
+    数据 Note 信息
+"""
+DATA_NOTE = Note.Note()
+
+"""
+    保存的数据类型
+"""
+SAVEDATA_LIST = [
+    AcceDataList.AcceDataList.TYPE,
+    AudioDataList.AudioDataList.TYPE,
+    GyroDataList.GyroDataList.TYPE,
+    GyroUDataList.GyroUDataList.TYPE,
+    MagnDataList.MagnDataList.TYPE,
+    MagnUDataList.MagnUDataList.TYPE,
+    RotaDataList.RotaDataList.TYPE,
+]
+
 def main() -> None:
     view = View(2200, 1200)
 
     # 数据载入服务
-    dataLoader = DataLoad(MODEL_DICT)
+    dataLoader = DataLoad(MODEL_DICT, DATA_NOTE)
     # 数据显示服务
     dataShower = DataShow(MODEL_DICT)
     # 数据保存服务
     dataSaver = DataSave()
+    # 数据标签服务
+    dataTager = DataTag(MODEL_DICT, DATA_NOTE, SAVEDATA_LIST)
 
-    # 控制器的生成顺序必须固定
     # 数据载入控制器
     dataLoadController = DataLoadController(dataLoader, dataSaver, view)
     dataLoadController.setSlot()

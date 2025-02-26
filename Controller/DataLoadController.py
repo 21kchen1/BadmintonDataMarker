@@ -32,6 +32,8 @@ class DataLoadController:
     def selectFolder(self) -> None:
         # 选择路径
         rootPath = self.view.selectFolder()
+        if not rootPath:
+            return
         # 检测路径
         if not self.dataSave.checkPath(rootPath):
             self.view.errorShow(ErrorInfo.SELECT_FOLDER)
@@ -57,6 +59,8 @@ class DataLoadController:
         ################################################################################################
         # self.dataSave.createSave(self.rootPath)
         self.view.runningMode()
+        # 载入成功
+        self.view.ui.StartSucceedButton.click()
         self.rootPath = None
 
     """

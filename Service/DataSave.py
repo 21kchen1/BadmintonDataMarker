@@ -1,15 +1,15 @@
-
-"""
-    数据保存服务
-    @author chen
-"""
-
 import json
 import logging
 import os
 
 from Resources.String import FileEndName, Encoding
+from Util import Path
 
+"""
+    数据保存服务
+    负责存储文件创建写入与删除
+    @author chen
+"""
 
 class DataSave:
 
@@ -30,6 +30,9 @@ class DataSave:
             return False
         # 检测路径同级文件是否存在 json
         if os.path.exists(rootPath + FileEndName.JSON):
+            return False
+        # 检测子文件 json 数量
+        if not len([filePath for filePath in Path.getFilePaths(rootPath) if filePath.endswith(FileEndName.JSON)]) == 1:
             return False
         return True
 

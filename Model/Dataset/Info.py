@@ -4,19 +4,19 @@
     @author chen
 """
 
+from Model.Note.Note import Note
+
+
 class Info:
     """
-        @param gender 性别
-        @param exp 经验
-        @param section 回合
-        @param device 设备
+        @param note 数据基本信息
         @param startTimestamp 开始时间戳
         @param endTimestamp 结束时间戳
     """
-    def __init__(self, gender: str, exp: str, section: int, device: str, startTimestamp: int, endTimestamp: int) -> None:
-        self.gender = gender
-        self.exp = exp
-        self.section = section
-        self.device = device
+    def __init__(self, note: Note, startTimestamp: int, endTimestamp: int) -> None:
+        self.gender = note.gender
+        self.exp = note.exp
+        self.section = note.time
+        self.device = note.other
         self.startTimestamp = startTimestamp
         self.endTimestamp = endTimestamp

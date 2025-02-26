@@ -220,5 +220,5 @@ class DataShowController:
         self.view.ui.DataTypeGroup.buttonClicked.connect(self.dataTypeSet)
         self.view.ui.AxisGroup.buttonClicked.connect(self.axisSet)
         self.view.ui.RangeSpinBox.valueChanged.connect(self.rangeSet)
-        # 开始
-        self.view.ui.TagStartButton.clicked.connect(self.startProcess)
+        # 载入成功
+        self.view.ui.StartSucceedButton.clicked.connect(self.startProcess)
