@@ -116,13 +116,21 @@ class DataShowController:
     ######################################
     def axisSet(self) -> None:
         axisList = []
-        for name, axis in DataShowController.CHECK_ATTR_DICT.items():
-            # 尝试获取按钮
-            button = getattr(self.view.ui, name)
-            # 不存在或未选中
-            if not button or not button.isChecked():
+        # 获取选中按钮组
+        for button in self.view.ui.AxisGroup.buttons():
+            if not button.isChecked():
+                continue
+            axis = DataShowController.CHECK_ATTR_DICT.get(button.objectName())
+            if not axis:
                 continue
             axisList.append(axis)
+        # for name, axis in DataShowController.CHECK_ATTR_DICT.items():
+        #     # 尝试获取按钮
+        #     button = getattr(self.view.ui, name)
+        #     # 不存在或未选中
+        #     if not button or not button.isChecked():
+        #         continue
+        #     axisList.append(axis)
         self.nowAttrList = axisList
         self.showGraph()
 
