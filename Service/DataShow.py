@@ -69,20 +69,23 @@ class DataShow:
         return timestampList[sIndex : eIndex + 1]
 
     """
-        根据时间戳获取范围数据
+        根据时间戳获取范围属性数据
         @param dataType 数据类型
-        @param dataValue 属性值下标
         @param start 起点时间戳
         @param end 终点时间戳
-        @return list 数值
+        @return list (名称, 数值)
     """
-    def getTypeDataValue(self, dataType: str, dataValue: int, start: int, end: int) -> list:
+    def getTypeAttrList(self, dataType: str, start= None, end= None) -> list:
         # 获取数据类型
         typeData = self.modelDict.get(dataType)
         if not typeData:
             return None
-        # 获取属性值
-        valueList = typeData.getValuesByIndex(dataValue)
+        # 获取属性列表
+        attrList = list(typeData.getAttrDict().items())
+        if start == None or end == None:
+            return attrList
         # 获取下标
         sIndex, eIndex = typeData.getRangeIndex(start, end)
-        return valueList[sIndex : eIndex + 1]
+        # 切割后的列表
+        rangeList = [(attr[0], attr[1][sIndex : eIndex + 1]) for attr in attrList]
+        return rangeList

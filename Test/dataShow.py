@@ -42,7 +42,7 @@ if __name__ == "__main__":
     bef = time.time()
     loadService.loadData(S)
 
-    print(showService.getTypeDataValue(DataType.GYRO, 1, 901, 1000)[1])
+    print(showService.getTypeAttrList(DataType.GYRO, 1, 901, 1000)[1])
     # 创建 PyQt 应用
     app = QApplication(sys.argv)
 

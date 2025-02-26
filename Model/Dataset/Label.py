@@ -1,6 +1,7 @@
 
 """
     数据存储单元标签
+    @author chen
 """
 
 class Label:

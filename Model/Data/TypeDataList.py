@@ -63,11 +63,21 @@ class TypeDataList:
     """
         通过数字下标获取属性值
         @param index 数字下标
-        @return list 值列表
+        @return str 属性
+        @return list 值
     """
-    def getValuesByIndex(self, index: int) -> list:
+    def getValueByIndex(self, index: int) -> list:
         if index >= self.valueNum:
             return None
         attrList = list(self.__dict__.keys())
         index = len(attrList) - self.valueNum + index
         return getattr(self, attrList[index])
+
+    """
+        获取属性字典
+        @return dict 属性值字典
+    """
+    def getAttrDict(self) -> dict:
+        attrList = list(self.__dict__.items())
+        return dict(attrList[-self.valueNum : ])
+

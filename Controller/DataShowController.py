@@ -22,9 +22,9 @@ class DataShowController:
 
     # CheckButton 与 数据属性的映射
     CHECK_ATTR_DICT = {
-        View.X_CHECK: (0, "X"),
-        View.Y_CHECK: (1, "Y"),
-        View.Z_CHECK: (2, "Z"),
+        View.X_CHECK: 0,
+        View.Y_CHECK: 1,
+        View.Z_CHECK: 2,
     }
 
     """
@@ -42,8 +42,8 @@ class DataShowController:
         self.nowProcess = 0
         # 当前数据类型
         self.nowDataType = None
-        # 当前属性列表
-        self.nowAttrList = []
+        # 当前轴列表
+        self.nowAxisList = []
         # 当前显示时间访问
         self.nowTimeRange = 0
 
@@ -68,11 +68,11 @@ class DataShowController:
         # 标签与数据字典
         # setPlotLineChart 的 dataDict 参数接收的是 {label: data}
         dataDict = {}
-        # 遍历设置并获取数据
-        for attr in self.nowAttrList:
-            label = attr[1]
-            data = self.dataShow.getTypeDataValue(self.nowDataType, attr[0], sIndex, eIndex)
-            dataDict[label] = data
+        # 获取数据列表
+        typeDataList = self.dataShow.getTypeAttrList(self.nowDataType, sIndex, eIndex)
+        # 根据选中的轴获取数据
+        for axis in self.nowAxisList:
+            dataDict[typeDataList[axis][0]] = typeDataList[axis][1]
 
         # 提示范围
         flagRange = 0
@@ -90,7 +90,7 @@ class DataShowController:
     def applyGraphSet(self) -> None:
         # 获取所有属性
         self.nowDataType = self.dataTypeSet()
-        self.nowAttrList = self.getAxisSet()
+        self.nowAxisList = self.getAxisSet()
         self.nowTimeRange = self.view.ui.RangeSpinBox.value()
         # 更新图表
         self.showGraph()
@@ -113,7 +113,6 @@ class DataShowController:
         Axis 设置
         读取数据并更新图表
     """
-    ######################################
     def axisSet(self) -> None:
         axisList = []
         # 获取选中按钮组
@@ -121,17 +120,10 @@ class DataShowController:
             if not button.isChecked():
                 continue
             axis = DataShowController.CHECK_ATTR_DICT.get(button.objectName())
-            if not axis:
+            if axis == None:
                 continue
             axisList.append(axis)
-        # for name, axis in DataShowController.CHECK_ATTR_DICT.items():
-        #     # 尝试获取按钮
-        #     button = getattr(self.view.ui, name)
-        #     # 不存在或未选中
-        #     if not button or not button.isChecked():
-        #         continue
-        #     axisList.append(axis)
-        self.nowAttrList = axisList
+        self.nowAxisList = axisList
         self.showGraph()
 
     """
