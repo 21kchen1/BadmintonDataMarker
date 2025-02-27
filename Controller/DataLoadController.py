@@ -1,4 +1,4 @@
-import time
+from Controller.Controller import Controller
 from Resources.String import ErrorInfo
 from Service.DataLoad import DataLoad
 from Service.DataSave import DataSave
@@ -10,16 +10,16 @@ from View.View import View
     @author chen
 """
 
-class DataLoadController:
+class DataLoadController(Controller):
     """
         @param dataLoad 数据载入服务
         @param dataSave 数据保存服务
         @param view 视图
     """
     def __init__(self, dataLoad: DataLoad, dataSave: DataSave, view: View) -> None:
+        super().__init__(view)
         self.dataLoad = dataLoad
         self.dataSave = dataSave
-        self.view = view
         self.rootPath = None
 
     """

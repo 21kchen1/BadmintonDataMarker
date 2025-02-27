@@ -1,3 +1,4 @@
+from Controller.Controller import Controller
 from Resources import Integer
 from Resources.String import DataType
 from Service.DataShow import DataShow
@@ -9,7 +10,7 @@ from View.View import View
     @author chen
 """
 
-class DataShowController:
+class DataShowController(Controller):
     # 循环定时器间隔 100 ms
     LOOP_INTER = Integer.Controller.LOOP_INTER
 
@@ -32,8 +33,8 @@ class DataShowController:
         @param view 视图
     """
     def __init__(self, dataShow: DataShow, view: View) -> None:
+        super().__init__(view)
         self.dataShow = dataShow
-        self.view = view
         # 是否播放
         self.isPlaying = False
         # 当前时间戳

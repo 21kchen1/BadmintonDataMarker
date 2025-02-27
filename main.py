@@ -1,5 +1,6 @@
 from Controller.DataLoadController import DataLoadController
 from Controller.DataShowController import DataShowController
+from Controller.DataTagController import DataTagController
 from Service.DataLoad import DataLoad
 from Service.DataSave import DataSave
 from Service.DataShow import DataShow
@@ -67,6 +68,9 @@ def main() -> None:
     # 数据显示控制器
     dataShowController = DataShowController(dataShower, view)
     dataShowController.setSlot()
+    # 数据标签控制器
+    dataTagController = DataTagController(dataTager, dataSaver, view)
+    dataTagController.setSlot()
 
     view.run()
 

@@ -56,7 +56,7 @@ class TypeDataList:
         @return int 大于等于 start 的时间戳下标
         @return int 小于等于 end 的时间戳下标
     """
-    def getRangeIndex(self, start: int, end: int) -> int:
+    def getRangeIndex(self, start: int, end: int) -> tuple:
         # 如果没有载入数据
         if self.listLen <= 0 or start > end:
             return None, None
@@ -71,8 +71,8 @@ class TypeDataList:
 
     """
         通过数字下标获取属性值
+        下标：属性的定义顺序
         @param index 数字下标
-        @return str 属性
         @return list 值
     """
     def getValueByIndex(self, index: int) -> list:
@@ -83,10 +83,20 @@ class TypeDataList:
         return getattr(self, attrList[index])
 
     """
+        通过数字下标获取时间戳
+        下标：时间戳列表的下标
+        @param index 数字下标
+        @return int 时间戳
+    """
+    def getTimeStampByIndex(self, index: int) -> int:
+        if index >= self.listLen:
+            return None
+        return self.timestamp[index]
+
+    """
         获取属性字典
         @return dict 属性值字典
     """
     def getAttrDict(self) -> dict:
         attrList = list(self.__dict__.items())
         return dict(attrList[-self.valueNum : ])
-

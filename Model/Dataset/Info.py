@@ -14,6 +14,7 @@ class Info:
         @param endTimestamp 结束时间戳
     """
     def __init__(self, note: Note, startTimestamp: int, endTimestamp: int) -> None:
+        self.recordName = note.recordName
         self.gender = note.gender
         self.exp = note.exp
         self.section = note.time
