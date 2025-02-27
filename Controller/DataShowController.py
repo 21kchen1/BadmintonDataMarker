@@ -198,7 +198,7 @@ class DataShowController(Controller):
         开始处理
         加载数据并显示图像
     """
-    def startProcess(self) -> None:
+    def startShow(self) -> None:
         # 加载数据
         self.stepSet()
         self.dataTypeSet()
@@ -222,4 +222,4 @@ class DataShowController(Controller):
         self.view.ui.AxisGroup.buttonClicked.connect(self.axisSet)
         self.view.ui.RangeSpinBox.valueChanged.connect(self.rangeSet)
         # 载入成功
-        self.view.ui.LoadSucceedButton.clicked.connect(self.startProcess)
+        self.view.ui.StartShowButton.clicked.connect(self.startShow)

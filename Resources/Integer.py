@@ -14,3 +14,5 @@ class Controller:
     LOOP_INTER = 100
     # 截取数据长度 2000 ms
     DATA_LEN = 2000
+    # 截取数据长度的一半
+    HALF_DATA_LEN = DATA_LEN / 2

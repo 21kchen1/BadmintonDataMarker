@@ -2,6 +2,7 @@ import json
 import logging
 import os
 
+from Model.Dataset.DataUnit import DataUnit
 from Resources.String import FileEndName, Encoding
 from Util import Path
 
@@ -52,27 +53,41 @@ class DataSave:
         return True
 
     """
-        向存储文件尾部添加数据单元
-        @param dataUnit 数据单元 dict
+        删除存储文件
+        @return bool 是否删除成功
     """
-    def saveDataUnit(self, dataUnit: dict) -> bool:
+    def deleteSave(self) -> bool:
+        # 存储文件异常
+        if not self.storePath or not os.path.exists(self.storePath):
+            return False
+        os.remove(self.storePath)
+        return True
+
+    """
+        向存储文件尾部添加数据单元
+        @param dataUnit 数据单元
+    """
+    def saveDataUnit(self, dataUnit: DataUnit) -> bool:
         # 存储路径异常
         if not self.storePath or not os.path.exists(self.storePath):
             return False
 
-        # 读取数据
         try:
+            # 读取数据
             with open(self.storePath, "r", newline= "", encoding= Encoding.UTF8) as file:
                 dataSet = json.load(file)
+            if not isinstance(dataSet, list):
+                return False
+            # 添加数据
+            dataSet.append(dataUnit.__dict__)
+            # 存储数据
+            with open(self.storePath, "w", encoding= Encoding.UTF8) as file:
+                json.dump(dataSet, file, ensure_ascii= False, indent= 4)
         except Exception as e:
             logging.error(e)
             return False
-
-        if not isinstance(dataSet, list):
-            return False
-        # 添加数据
-        dataSet.append(dataUnit)
-        # 存储数据
-        with open(self.storePath, "w", encoding= Encoding.UTF8) as file:
-            json.dump(dataSet, file, ensure_ascii= False, indent= 4)
         return True
+
+    """
+        删除下标指定
+    """

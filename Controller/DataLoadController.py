@@ -57,11 +57,12 @@ class DataLoadController(Controller):
             self.view.standbyMode()
             return
         # 创建数据文件
-        ################################################################################################
-        # self.dataSave.createSave(self.rootPath)
+        self.dataSave.createSave(self.rootPath)
         self.view.runningMode()
-        # 载入成功
-        self.view.loadSucceed()
+        # 开始标签
+        self.view.startTag()
+        # 开始显示
+        self.view.startShow()
         self.rootPath = None
 
     """

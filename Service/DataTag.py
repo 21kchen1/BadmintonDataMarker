@@ -68,7 +68,7 @@ class DataTag:
         @param optimize 是否生成插值优化函数
         @return DataUnit 数据存储单元
     """
-    def createDataUnit(self, startTimestamp: int, endTimestamp: int, label: Label, optimize= False) -> None:
+    def createDataUnit(self, startTimestamp: int, endTimestamp: int, label: Label, optimize= False) -> DataUnit:
         # 生成信息
         info = Info(self.note, startTimestamp, endTimestamp)
         # 截取的数据字典 {数据类型 : 截取数据}
@@ -89,7 +89,7 @@ class DataTag:
             dataTimestamp[dataType] = typeData.timestamp[sIndex : eIndex + 1]
             # 遍历属性并截取其值
             for attrName, attrValueList in attrDict.items():
-                attrDict[attrName] = attrValueList[sIndex : eIndex + 1]
+                attrDict[attrName] = list(attrValueList[sIndex : eIndex + 1])
             # 记录于数据字典
             dataDict[dataType] = attrDict
         # 无需优化

@@ -40,13 +40,23 @@ class View:
         self.ui = Ui_DataMarker()
         self.width = width
         self.height = height
-
+        # 运行模式 [false: 待机, true: 运行]
+        self.mode = False
         self.uiInit()
+
+    """
+        设置关闭回调函数
+        @param callback 回调函数
+    """
+    def setCloseCallback(self, callback) -> None:
+        self.closeCallback = callback
 
     """
         关闭事件
     """
     def closeEvent(self, event) -> None:
+        if self.closeCallback:
+            self.closeCallback()
         self.app.quit()
         event.accept()
 
@@ -65,22 +75,39 @@ class View:
         self.GraphLayout = QtWidgets.QVBoxLayout(self.ui.GraphWidget)
         self.GraphWidget = GraphWidget(self.mainWidget)
         self.GraphLayout.addWidget(self.GraphWidget)
-        # 隐藏按钮 用于表示
-        self.ui.LoadSucceedButton.setVisible(False)
-
+        # 隐藏按钮 用于触发对应的服务
+        self.ui.StartShowButton.setVisible(False)
+        self.ui.StartTagButton.setVisible(False)
         # 计时器
         self.timer = QtCore.QTimer(self.mainWidget)
-
         # 关闭事件
         self.mainWidget.closeEvent = self.closeEvent
         # 设置模式
         self.standbyMode()
 
     """
+        重置数据
+        将视图数据初始化
+    """
+    def resetData(self) -> None:
+        # 时间戳重置
+        self.ui.TimeSpinBox.setValue(0)
+        # 击球点坐标标签重置
+        self.ui.XLineEdit.setText("")
+        self.ui.YLineEdit.setText("")
+        # 进度重置
+        self.ui.SaveLineEdit.setText("")
+        # 清除数据图表
+        self.GraphWidget.clean()
+        # 清除视频数据
+        self.VideoWidget.clean()
+
+    """
         待机模式
         文件设置与开始可用
     """
     def standbyMode(self) -> None:
+        self.mode = False
         self.ui.TagFolderWidget.setEnabled(True)
         self.ui.TagSetWidget.setEnabled(False)
         self.ui.SetWidget.setEnabled(False)
@@ -90,6 +117,7 @@ class View:
         全部禁用
     """
     def loadMode(self) -> None:
+        self.mode = False
         self.ui.TagFolderWidget.setEnabled(False)
         self.ui.TagSetWidget.setEnabled(False)
         self.ui.SetWidget.setEnabled(False)
@@ -99,18 +127,28 @@ class View:
         标签与图表设置可用
     """
     def runningMode(self) -> None:
+        self.mode = True
         self.ui.TagFolderWidget.setEnabled(False)
         self.ui.TagSetWidget.setEnabled(True)
         self.ui.SetWidget.setEnabled(True)
 
     """
-        载入成功
-        触发载入成功按钮
+        开始展示
+        触发开始展示按钮
     """
-    def loadSucceed(self) -> None:
-        self.ui.LoadSucceedButton.setEnabled(True)
-        self.ui.LoadSucceedButton.click()
-        self.ui.LoadSucceedButton.setEnabled(False)
+    def startShow(self) -> None:
+        self.ui.StartShowButton.setEnabled(True)
+        self.ui.StartShowButton.click()
+        self.ui.StartShowButton.setEnabled(False)
+
+    """
+        开始标签
+        触发开始标签按钮
+    """
+    def startTag(self) -> None:
+        self.ui.StartTagButton.setEnabled(True)
+        self.ui.StartTagButton.click()
+        self.ui.StartTagButton.setEnabled(False)
 
     """
         文件夹路径设置
@@ -137,6 +175,14 @@ class View:
     """
     def errorShow(self, info: str) -> None:
         QtWidgets.QMessageBox.critical(self.mainWidget, "Error", f" {info} ")
+
+    """
+        保存确定窗口
+        @return bool 是否保存
+    """
+    def toSave(self) -> bool:
+        return QtWidgets.QMessageBox.Yes == QtWidgets.QMessageBox.question(self.mainWidget, "Save DataSet File", "Whether to save a coordinate file?",
+                                                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
 
     """
         执行

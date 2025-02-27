@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>950</width>
-    <height>589</height>
+    <width>956</width>
+    <height>545</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -713,7 +713,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="LoadSucceedButton">
+          <widget class="QPushButton" name="StartShowButton">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
              <horstretch>0</horstretch>
@@ -734,6 +734,19 @@
            </property>
            <property name="checkable">
             <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="StartTagButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
@@ -871,6 +884,9 @@
                       <horstretch>0</horstretch>
                       <verstretch>1</verstretch>
                      </sizepolicy>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
                     </property>
                     <property name="readOnly">
                      <bool>true</bool>

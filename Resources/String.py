@@ -25,9 +25,10 @@ class FileEndName:
     与错误窗口相关的字符串
 """
 class ErrorInfo:
-    SELECT_FOLDER = "Folder exception."
-    DATALOAD_PATH = "Data Load path exception."
-    DATALOAD = "Data Load exception."
+    SELECT_FOLDER = "Folder Exception."
+    DATALOAD_PATH = "Data Load Path Exception."
+    DATALOAD = "Data Load Exception."
+    STORAGE_FILE = "Storage File Exception."
 
 """
     与编码相关的字符串
