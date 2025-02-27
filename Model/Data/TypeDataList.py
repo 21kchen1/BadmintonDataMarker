@@ -31,6 +31,13 @@ class TypeDataList:
         pass
 
     """
+        是否空数据
+        @return bool 是否空
+    """
+    def emptyData(self) -> bool:
+        return self.listLen <= 0
+
+    """
         检测数据长度是否正确
         @param dataLists 若干个数据列表
         @return 这几个列表长度是否正确
@@ -50,7 +57,9 @@ class TypeDataList:
         @return int 小于等于 end 的时间戳下标
     """
     def getRangeIndex(self, start: int, end: int) -> int:
-        if start > end: return 0
+        # 如果没有载入数据
+        if self.listLen <= 0 or start > end:
+            return None, None
         # 大于等于 start
         def __GES(mid: int) -> bool:
             return self.timestamp[mid] >= start

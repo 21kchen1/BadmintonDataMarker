@@ -11,7 +11,7 @@ class Label:
         @param actionType 动作类型
         @param actionEval 动作评价
     """
-    def __init__(self, positionX: int, positionY: int, actionType: str, actionEval: str) -> None:
+    def __init__(self, positionX: float, positionY: float, actionType: str, actionEval: str) -> None:
         self.positionX = positionX
         self.positionY = positionY
         self.actionType = actionType

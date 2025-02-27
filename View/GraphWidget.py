@@ -44,7 +44,7 @@ class GraphWidget(QWidget):
         ax.set_title(title)
         # 绘制数据
         for name, data in dataDict.items():
-            ax.plot(timestamp, data, label= f"{name}")
+            ax.plot(timestamp, data, marker='o', label= f"{name}")
         # 设置提示
         ax.axvline(x= flagTime, color= "g", linestyle='--', linewidth=1)
         if flagRange > 0:

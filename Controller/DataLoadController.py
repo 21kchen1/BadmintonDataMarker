@@ -1,3 +1,4 @@
+import time
 from Resources.String import ErrorInfo
 from Service.DataLoad import DataLoad
 from Service.DataSave import DataSave
@@ -60,7 +61,7 @@ class DataLoadController:
         # self.dataSave.createSave(self.rootPath)
         self.view.runningMode()
         # 载入成功
-        self.view.ui.StartSucceedButton.click()
+        self.view.loadSucceed()
         self.rootPath = None
 
     """

@@ -18,3 +18,13 @@ class DataTag:
         self.modelDict = modelDict
         self.note = note
         self.saveDataList = saveDataList
+
+    """
+        根据下标获取击球点坐标与时间戳
+        @param index 击球次数
+        @return float 坐标 x
+        @return float 坐标 y
+        @return int 时间戳
+    """
+    def getPositionByIndex() -> None:
+        pass

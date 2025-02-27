@@ -65,8 +65,8 @@ class View:
         self.GraphLayout = QtWidgets.QVBoxLayout(self.ui.GraphWidget)
         self.GraphWidget = GraphWidget(self.mainWidget)
         self.GraphLayout.addWidget(self.GraphWidget)
-        # 隐藏按钮
-        self.ui.StartSucceedButton.setVisible(False)
+        # 隐藏按钮 用于表示
+        self.ui.LoadSucceedButton.setVisible(False)
 
         # 计时器
         self.timer = QtCore.QTimer(self.mainWidget)
@@ -102,6 +102,15 @@ class View:
         self.ui.TagFolderWidget.setEnabled(False)
         self.ui.TagSetWidget.setEnabled(True)
         self.ui.SetWidget.setEnabled(True)
+
+    """
+        载入成功
+        触发载入成功按钮
+    """
+    def loadSucceed(self) -> None:
+        self.ui.LoadSucceedButton.setEnabled(True)
+        self.ui.LoadSucceedButton.click()
+        self.ui.LoadSucceedButton.setEnabled(False)
 
     """
         文件夹路径设置

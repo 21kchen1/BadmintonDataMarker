@@ -32,14 +32,16 @@ class DataShow:
         @return float 进度百分比
     """
     def getVideoQImage(self, timestamp: int) -> QImage:
-        if not self.modelDict.get(DataType.VIDEO):
+        videoData = self.modelDict.get(DataType.VIDEO)
+        # 不存在或未载入
+        if not videoData or videoData.emptyData():
             return None, None
         # 获取图像数据
-        index, _ = self.modelDict[DataType.VIDEO].getRangeIndex(timestamp, timestamp)
-        values = self.modelDict[DataType.VIDEO].values[index]
+        index, _ = videoData.getRangeIndex(timestamp, timestamp)
+        imageValue = videoData.getValueByIndex(0)[index]
         # 处理数据
-        values = list(map(int, values.strip('[]"').split(", ")))
-        dataBytes = np.array(values, dtype=np.uint8).tobytes()
+        imageValue = list(map(int, imageValue.strip('[]"').split(", ")))
+        dataBytes = np.array(imageValue, dtype=np.uint8).tobytes()
         # 使用 io.BytesIO 将字节数据转换为文件类对象
         imageData = io.BytesIO(dataBytes).getvalue()
         # 使用 cv2 读取图像数据
@@ -60,7 +62,8 @@ class DataShow:
     def getTypeDataTimestamp(self, dataType: str, start: int, end: int) -> list:
         # 获取数据类型
         typeData = self.modelDict.get(dataType)
-        if not typeData:
+        # 没有数据类型或未载入
+        if not typeData or typeData.emptyData():
             return None
         # 获取时间戳
         timestampList = typeData.timestamp
@@ -78,7 +81,8 @@ class DataShow:
     def getTypeAttrList(self, dataType: str, start= None, end= None) -> list:
         # 获取数据类型
         typeData = self.modelDict.get(dataType)
-        if not typeData:
+        # 没有数据类型或未载入
+        if not typeData or typeData.emptyData():
             return None
         # 获取属性列表
         attrList = list(typeData.getAttrDict().items())
