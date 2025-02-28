@@ -26,6 +26,7 @@ class GraphWidget(QWidget):
     """
     def clean(self) -> None:
         self.figure.clear()
+        self.canvas.draw()
 
     """
         绘制折线图
@@ -37,7 +38,7 @@ class GraphWidget(QWidget):
     """
     def setPlotLineChart(self, title: str, timestamp: list, dataDict: dict, flagTime: int, flagRange= 0) -> None:
         # 清除
-        self.clean()
+        self.figure.clear()
         # 创建新图形
         ax = self.figure.add_subplot(111)
         # 设置标题

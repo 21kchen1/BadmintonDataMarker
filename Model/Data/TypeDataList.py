@@ -25,6 +25,16 @@ class TypeDataList:
         self.valueNum = valueNum
 
     """
+        清除数据
+    """
+    def cleanData(self) -> None:
+        # 遍历属性并重置
+        for key in self.__dict__.keys():
+            setattr(self, key, None)
+        self.timestamp = []
+        self.listLen = 0
+
+    """
         数据处理
     """
     def procData(self) -> None:

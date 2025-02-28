@@ -42,11 +42,9 @@ class DataTag:
     """
     def getPositionByIndex(self, index: int) -> tuple:
         positionData = self.modelDict.get(DataType.POSITION)
-        if not positionData or positionData.emptyData():
-            return None
-        # 超过范围
-        if index >= positionData.listLen:
-            return None
+        # 无效或超过范围
+        if not positionData or positionData.emptyData() or index >= positionData.listLen:
+            return None, None, None
         # 获取击球点
         attrDict = list(positionData.getAttrDict().values())
         positionX = attrDict[0][index]
@@ -59,6 +57,17 @@ class DataTag:
     """
     def getNoteSportType(self) -> str:
         return self.note.action
+
+    """
+        生成空数据存储单元
+        @param startTimestamp 开始时间戳
+        @param endTimestamp 结束时间戳
+        @return DataUnit 数据存储单元
+    """
+    def createNoneDataUnit(self, startTimestamp: int, endTimestamp: int) -> DataUnit:
+        # 生成信息
+        info = Info(self.note, startTimestamp, endTimestamp)
+        return DataUnit(info)
 
     """
         生成数据存储单元

@@ -195,7 +195,7 @@ class DataShowController(Controller):
         self.view.ui.TimeSpinBox.setValue(self.nowTimestamp + step)
 
     """
-        开始处理
+        开始进行处理
         加载数据并显示图像
     """
     def startShow(self) -> None:

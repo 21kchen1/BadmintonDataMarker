@@ -275,9 +275,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
                     <property name="minimum">
                      <number>0</number>
                     </property>
@@ -324,9 +321,6 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
                     </property>
                     <property name="maximum">
                      <number>200000000</number>
@@ -540,9 +534,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <property name="alignment">
-                     <set>Qt::AlignCenter</set>
-                    </property>
                     <property name="minimum">
                      <number>0</number>
                     </property>
@@ -684,9 +675,6 @@
                    <horstretch>0</horstretch>
                    <verstretch>1</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
                  </property>
                  <property name="readOnly">
                   <bool>true</bool>
@@ -931,9 +919,6 @@
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                       </property>
                       </widget>
                      </item>
                      <item row="0" column="0">
@@ -969,9 +954,6 @@
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -1153,9 +1135,6 @@
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                       </property>
                        <property name="readOnly">
                         <bool>true</bool>
                        </property>
@@ -1194,9 +1173,6 @@
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
                        </property>
                        <property name="readOnly">
                         <bool>true</bool>
