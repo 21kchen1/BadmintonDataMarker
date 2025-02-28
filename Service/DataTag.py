@@ -1,3 +1,4 @@
+from Model.Data.TypeDataList import TypeDataList
 from Model.Dataset.DataUnit import DataUnit
 from Model.Dataset.Info import Info
 from Model.Dataset.Label import Label
@@ -82,8 +83,6 @@ class DataTag:
         info = Info(self.note, startTimestamp, endTimestamp)
         # 截取的数据字典 {数据类型 : 截取数据}
         dataDict = {}
-        # 数据时间戳字典 {数据类型 : 截取时间戳}
-        dataTimestamp = {}
         # 获取需要保存的属性字典并截取数据
         for dataType in self.saveDataList:
             typeData = self.modelDict.get(dataType)
@@ -95,7 +94,7 @@ class DataTag:
             # 获取区间下标
             sIndex, eIndex = typeData.getRangeIndex(startTimestamp, endTimestamp)
             # 存储属性时间戳
-            dataTimestamp[dataType] = typeData.timestamp[sIndex : eIndex + 1]
+            attrDict[TypeDataList.TIMESTAMP] = typeData.timestamp
             # 遍历属性并截取其值
             for attrName, attrValueList in attrDict.items():
                 attrDict[attrName] = list(attrValueList[sIndex : eIndex + 1])

@@ -84,7 +84,7 @@ class DataShow:
         # 没有数据类型或未载入
         if not typeData or typeData.emptyData():
             return None
-        # 获取属性列表
+        # 获取属性字典列表
         attrList = list(typeData.getAttrDict().items())
         if start == None or end == None:
             return attrList

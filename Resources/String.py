@@ -3,6 +3,9 @@
     与数据模型相关的字符串
 """
 class DataType:
+    TIMESTAMP = "timestamp"
+    LIST_LEN = "listLen"
+
     ACCE = "ACCELEROMETER"
     ACCE_U = "ACCELEROMETER_UNCALIBRATED"
     AUDIO = "AUDIO"

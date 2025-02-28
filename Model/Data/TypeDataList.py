@@ -1,3 +1,4 @@
+from Resources import String
 from Util.BSearch import bSearchL, bSearchR
 
 """
@@ -6,6 +7,9 @@ from Util.BSearch import bSearchL, bSearchR
 """
 
 class TypeDataList:
+    TIMESTAMP = String.DataType.TIMESTAMP
+    LIST_LEN = String.DataType.LIST_LEN
+
     def __init__(self) -> None:
         self.timestamp = []
         self.listLen = 0

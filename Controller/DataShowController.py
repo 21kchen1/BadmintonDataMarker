@@ -65,6 +65,9 @@ class DataShowController(Controller):
         eIndex = self.nowTimestamp + self.nowTimeRange / 2
         # 获取时间戳
         timestamp = self.dataShow.getTypeDataTimestamp(self.nowDataType, sIndex, eIndex)
+        # 没有对应的数据类型
+        if timestamp is None:
+            return
 
         # 标签与数据字典
         # setPlotLineChart 的 dataDict 参数接收的是 {label: data}
