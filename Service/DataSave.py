@@ -4,7 +4,7 @@ import os
 
 from Model.Dataset.DataUnit import DataUnit
 from Resources.String import FileEndName, Encoding
-from Util import Path
+from Util import Json, Path
 
 """
     数据保存服务
@@ -82,7 +82,9 @@ class DataSave:
             dataSet.append(dataUnit.__dict__)
             # 存储数据
             with open(self.storePath, "w", encoding= Encoding.UTF8) as file:
-                json.dump(dataSet, file, ensure_ascii= False, indent= 4)
+                # json.dump(dataSet, file, cls= Json.CompactArrayEncoder, ensure_ascii= False, indent= 4)
+                # 紧凑数组编码
+                file.write(Json.compactArrayJson(dataSet))
         except Exception as e:
             logging.error(e)
             return False
