@@ -1153,6 +1153,9 @@
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
+                       <property name="text">
+                        <string>0</string>
+                       </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
                        </property>
@@ -1195,6 +1198,9 @@
                          <verstretch>0</verstretch>
                         </sizepolicy>
                        </property>
+                       <property name="text">
+                        <string>1000</string>
+                       </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
                        </property>
@@ -1226,11 +1232,11 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="DataTypeGroup"/>
   <buttongroup name="AxisGroup">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="DataTypeGroup"/>
  </buttongroups>
 </ui>

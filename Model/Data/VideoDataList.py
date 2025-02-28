@@ -12,9 +12,6 @@ import io
 class VideoDataList(TypeDataList):
     TYPE = DataType.VIDEO
 
-    def __init__(self) -> None:
-        super().__init__(VideoDataList.TYPE)
-
     """
         @param ttimestamp 系统时间戳
         @param width 视频宽度

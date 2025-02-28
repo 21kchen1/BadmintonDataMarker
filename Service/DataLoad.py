@@ -34,6 +34,8 @@ class DataLoad:
         try:
             # 根据数据类型载入数据
             for key, dataModel in self.modelDict.items():
+                # 重置数据模型
+                dataModel.cleanData()
                 for filePath in filePaths:
                     if not filePath.endswith(key + FileEndName.CSV):
                         continue

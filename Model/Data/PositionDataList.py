@@ -9,9 +9,6 @@ from Resources.String import DataType
 class PositionDataList(TypeDataList):
     TYPE = DataType.POSITION
 
-    def __init__(self) -> None:
-        super().__init__(PositionDataList.TYPE)
-
     """
         @param timestamp 系统时间戳
         @param valueLists 坐标轴列表

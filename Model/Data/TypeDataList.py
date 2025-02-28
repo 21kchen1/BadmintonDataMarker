@@ -6,11 +6,7 @@ from Util.BSearch import bSearchL, bSearchR
 """
 
 class TypeDataList:
-    """
-        @param t_type 数据类型
-    """
-    def __init__(self, t_type: str) -> None:
-        self.type = t_type
+    def __init__(self) -> None:
         self.timestamp = []
         self.listLen = 0
 

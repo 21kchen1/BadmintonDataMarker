@@ -9,9 +9,6 @@ from Resources.String import DataType
 class MagnDataList(TypeDataList):
     TYPE = DataType.MAGN
 
-    def __init__(self) -> None:
-        super().__init__(MagnDataList.TYPE)
-
     """
         @param timestamp 系统时间戳
         @param sensorTimestamp 硬件时间戳

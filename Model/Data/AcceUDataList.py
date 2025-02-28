@@ -10,9 +10,6 @@ class AcceUDataList(TypeDataList):
     # 类型标识
     TYPE = DataType.ACCE_U
 
-    def __init__(self) -> None:
-        super().__init__(AcceUDataList.TYPE)
-
     """
         @param timestamp 系统时间戳
         @param sensorTimestamp 硬件时间戳

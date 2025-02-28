@@ -1,3 +1,4 @@
+import logging
 from Controller.Controller import Controller
 from Model.Dataset.DataUnit import DataUnit
 from Model.Dataset.Label import Label
@@ -53,7 +54,7 @@ class DataTagController(Controller):
         # 如果击球点数据异常
         if self.dataTag.getPositionNum() == None:
             return
-        
+
         # 击球点与时间戳
         positionX, positionY, timestamp = self.dataTag.getPositionByIndex(self.nowPositionIndex)
         # 设置
@@ -68,10 +69,14 @@ class DataTagController(Controller):
         @return Label 数据标签
     """
     def getDataLabel(self) -> Label:
-        positionX = float(self.view.ui.XLineEdit.text())
-        positionY = float(self.view.ui.YLineEdit.text())
-        actionType = self.view.ui.TypeComboBox.currentText()
-        actionEval = self.view.ui.EvalComboBox.currentText()
+        try:
+            positionX = float(self.view.ui.XLineEdit.text())
+            positionY = float(self.view.ui.YLineEdit.text())
+            actionType = self.view.ui.TypeComboBox.currentText()
+            actionEval = self.view.ui.EvalComboBox.currentText()
+        except Exception as e:
+            logging.error(e)
+            return None
         return Label(positionX, positionY, actionType, actionEval)
 
     """
@@ -125,6 +130,10 @@ class DataTagController(Controller):
     def validData(self) -> None:
         # 获取标签
         label = self.getDataLabel()
+        # 无效标签
+        if label == None:
+            self.view.errorShow(String.ErrorInfo.TAG_SET)
+            return
         # 获取数据时间范围
         startTimestamp = int(self.view.ui.StartLineEdit.text())
         endTimestamp = int(self.view.ui.EndLineEdit.text())
@@ -132,7 +141,6 @@ class DataTagController(Controller):
         dataUnit = self.dataTag.createDataUnit(startTimestamp, endTimestamp, label)
         # 保存进程
         self.saveTagProcess(dataUnit)
-
 
     """
         无效
@@ -147,7 +155,6 @@ class DataTagController(Controller):
         # 保存进程
         self.saveTagProcess(noneDataUnit)
 
-
     """
         取消
         删除最后一个保存的数据，返回到上一个坐标点
@@ -159,6 +166,7 @@ class DataTagController(Controller):
         开始进行标签
     """
     def startTag(self) -> None:
+        self.view.ui.TimeSpinBox.setValue(0)
         self.updateTagAndTimestamp()
 
     """

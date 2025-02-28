@@ -10,9 +10,6 @@ from Resources.String import DataType
 class RotaDataList(TypeDataList):
     TYPE = DataType.ROTA
 
-    def __init__(self) -> None:
-        super().__init__(RotaDataList.TYPE)
-
     """
         @param timestamp 系统时间戳
         @param sensorTimestamp 硬件时间戳

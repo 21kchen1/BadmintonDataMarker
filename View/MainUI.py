@@ -718,5 +718,7 @@ class Ui_DataMarker(object):
         self.EvalComboBox.setItemText(1, _translate("DataMarker", "Normal"))
         self.EvalComboBox.setItemText(2, _translate("DataMarker", "Bad"))
         self.label_11.setText(_translate("DataMarker", "Section (ms)"))
+        self.StartLineEdit.setText(_translate("DataMarker", "0"))
         self.label_12.setText(_translate("DataMarker", "Start:"))
         self.label_13.setText(_translate("DataMarker", "End:"))
+        self.EndLineEdit.setText(_translate("DataMarker", "1000"))
