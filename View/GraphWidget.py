@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication
 import matplotlib
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 sys.path.append("../")
 from Resources.String import Graph
@@ -14,11 +15,22 @@ from Resources.String import Graph
 class GraphWidget(QWidget):
     def __init__(self, parent= None) -> None:
         super(GraphWidget, self).__init__(parent)
+        self.uiInit()
+
+    """
+        初始化 ui
+    """
+    def uiInit(self) -> None:
         # 创建图表
         self.figure = Figure()
         self.canvas = FigureCanvas(self.figure)
-        # 将 canvas 添加到布局中
+        # 图表工具栏
+        self.toolBar = NavigationToolbar(self.canvas, self)
+        self.toolBar.setFixedHeight(30)
         self.vBoxLayout = QVBoxLayout(self)
+        # 添加 canvas 工具栏
+        self.vBoxLayout.addWidget(self.toolBar)
+        # 添加 canvas
         self.vBoxLayout.addWidget(self.canvas)
 
     """
