@@ -1,5 +1,6 @@
 from Resources import String
 from Util.BSearch import bSearchL, bSearchR
+import numpy
 
 """
     通用数据列表
@@ -23,6 +24,35 @@ class TypeDataList:
         self.timestamp = timestamp
         self.listLen = len(self.timestamp)
         self.valueNum = valueNum
+
+    """
+        数据去重
+        清除时间戳重叠的数据
+    """
+    def uniqueData(self) -> None:
+        # 属性列表 只处理载入的列表数据
+        # loadListName = {attrName:[] for attrName, attrValues in self.__dict__.items() if hasattr(attrValues, "__len__") and len(attrValues) == self.listLen}
+        loadListName = [attrName for attrName, attrValues in self.__dict__.items() if hasattr(attrValues, "__len__") and len(attrValues) == self.listLen]
+        # print(len(self.timestamp))
+        # 写入索引，从第一个开始
+        writerIndex = 1
+        maxTimestamp = self.timestamp[0]
+        for readIndex in range(1, len(self.timestamp)):
+            # 如果现在值小于等之前的最大值
+            if self.timestamp[readIndex] <= maxTimestamp:
+                continue
+            # 更大
+            # 更新最大值
+            maxTimestamp = self.timestamp[readIndex]
+            for attrName in loadListName:
+                self.__dict__[attrName][writerIndex] = self.__dict__[attrName][readIndex]
+            writerIndex += 1
+        # 清除无效部分
+        for attrName in loadListName:
+            self.__dict__[attrName] = self.__dict__[attrName][0 : writerIndex]
+        # print(len(self.timestamp))
+        # 更新数据长度
+        self.listLen = len(self.timestamp)
 
     """
         清除数据

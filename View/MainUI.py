@@ -168,7 +168,7 @@ class Ui_DataMarker(object):
         self.StepSpinBox.setAlignment(QtCore.Qt.AlignCenter)
         self.StepSpinBox.setMinimum(0)
         self.StepSpinBox.setMaximum(200000000)
-        self.StepSpinBox.setSingleStep(200)
+        self.StepSpinBox.setSingleStep(100)
         self.StepSpinBox.setProperty("value", 400)
         self.StepSpinBox.setObjectName("StepSpinBox")
         self.verticalLayout_4.addWidget(self.StepSpinBox)

@@ -42,6 +42,8 @@ class DataLoad:
                     data = pd.read_csv(filePath)
                     # 读取除了第一列的数据
                     dataModel.loadData(*[data[column].values for column in data.columns[1:]])
+                    # 去重
+                    dataModel.uniqueData()
             # 载入 note 数据
             for filePath in filePaths:
                 if not filePath.endswith(FileEndName.JSON):

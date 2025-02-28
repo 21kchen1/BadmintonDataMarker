@@ -3,7 +3,11 @@ from Model.Dataset.DataUnit import DataUnit
 from Model.Dataset.Info import Info
 from Model.Dataset.Label import Label
 from Model.Note.Note import Note
+from Resources import Integer
+from Resources import String
 from Resources.String import DataType
+from scipy.interpolate import interp1d
+import numpy as np
 
 """
     数据标签服务
@@ -103,4 +107,32 @@ class DataTag:
         # 无需优化
         if not optimize:
             return DataUnit(info, label, dataDict, None)
+
+        # 插值数据字典
+        interDataDict = {}
         # 对各个数据进行插值优化
+        for dataType, attrDict in dataDict.items():
+            # 排除音频数据
+            if dataType == String.DataType.AUDIO:
+                continue
+            # 插值属性字典
+            interAttrDict = {}
+            # 生成区间内的均匀时间戳 1000 个时间点
+            interAttrDict[TypeDataList.TIMESTAMP] = list(np.linspace(startTimestamp, endTimestamp, Integer.DataUnit.INTERDATA_NUM))
+            for attrName, attrValueList in attrDict.items():
+                # 如果是时间戳属性
+                if attrName == TypeDataList.TIMESTAMP:
+                    continue
+                # 根据数据量选择插值函数
+                interFuncType = "cubic"
+                if len(attrValueList) <= 4:
+                    # 线性插值函数
+                    interFuncType = "linear"
+                # 获取插值函数
+                interFunc = interp1d(attrDict[TypeDataList.TIMESTAMP], attrValueList, interFuncType, fill_value= "extrapolate")
+                # 使用插值函数结合新的时间戳计算对应的 Y 值
+                interAttrDict[attrName] = list(interFunc(interAttrDict[TypeDataList.TIMESTAMP]))
+            # 记录于插值数据字典
+            interDataDict[dataType] = interAttrDict
+
+        return DataUnit(info, label, dataDict, interDataDict)

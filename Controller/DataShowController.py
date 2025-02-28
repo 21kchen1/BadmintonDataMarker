@@ -80,8 +80,8 @@ class DataShowController(Controller):
 
         # 提示范围
         flagRange = 0
-        if self.nowTimeRange >= Integer.Controller.DATA_LEN:
-            flagRange = Integer.Controller.DATA_LEN
+        if self.nowTimeRange >= Integer.DataUnit.DATA_TIME_LEN:
+            flagRange = Integer.DataUnit.DATA_TIME_LEN
         # 设置并显示图表
         self.view.GraphWidget.setPlotLineChart(self.nowDataType, timestamp, dataDict, self.nowTimestamp, flagRange)
 

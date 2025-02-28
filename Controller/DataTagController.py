@@ -38,8 +38,8 @@ class DataTagController(Controller):
     """
     def updateSection(self) -> None:
         self.nowTimestamp = self.view.ui.TimeSpinBox.value()
-        self.view.ui.StartLineEdit.setText(f"{max(int(self.nowTimestamp - Integer.Controller.HALF_DATA_LEN), 0)}")
-        self.view.ui.EndLineEdit.setText(f"{int(self.nowTimestamp + Integer.Controller.HALF_DATA_LEN)}")
+        self.view.ui.StartLineEdit.setText(f"{max(int(self.nowTimestamp - Integer.DataUnit.HALF_DATA_TIME_LEN), 0)}")
+        self.view.ui.EndLineEdit.setText(f"{int(self.nowTimestamp + Integer.DataUnit.HALF_DATA_TIME_LEN)}")
 
     """
         根据当前击球点下标更新 tag 与 时间戳
@@ -137,8 +137,8 @@ class DataTagController(Controller):
         # 获取数据时间范围
         startTimestamp = int(self.view.ui.StartLineEdit.text())
         endTimestamp = int(self.view.ui.EndLineEdit.text())
-        # 生成数据单元
-        dataUnit = self.dataTag.createDataUnit(startTimestamp, endTimestamp, label)
+        # 生成数据单元 开启插值优化
+        dataUnit = self.dataTag.createDataUnit(startTimestamp, endTimestamp, label, True)
         # 保存进程
         self.saveTagProcess(dataUnit)
 

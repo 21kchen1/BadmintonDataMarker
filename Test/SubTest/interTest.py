@@ -21,7 +21,8 @@ x_new = np.linspace(x.min(), x.max(), 1000)
 y_new = f(x_new)
 
 # 绘制原始数据点和插值后的数据点
+x = [1, 1, 1, 1]
 plt.plot(x, y, 'o', label='原始数据点')
-plt.plot(x_new, y_new, 'o', label='插值后的数据点')
+plt.plot(x_new, y_new, '-', label='插值后的数据点')
 plt.legend()
 plt.show()
