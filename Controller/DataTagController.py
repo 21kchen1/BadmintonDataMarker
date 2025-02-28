@@ -160,7 +160,18 @@ class DataTagController(Controller):
         删除最后一个保存的数据，返回到上一个坐标点
     """
     def cancelData(self) -> None:
-        pass
+        # 空数据记录
+        if self.nowPositionIndex <= 0:
+            self.view.errorShow(String.ErrorInfo.STORAGE_FILE_NULL)
+            return
+        # 删除最后一个保存的数据
+        if not self.dataSave.deleteDataUnit(self.nowPositionIndex - 1):
+            self.view.errorShow(String.ErrorInfo.STORAGE_FILE)
+            return
+        # 进度更新
+        self.nowPositionIndex -= 1
+        # 显示
+        self.updateTagAndTimestamp()
 
     """
         开始进行标签
@@ -181,5 +192,7 @@ class DataTagController(Controller):
         self.view.ui.ValidButton.clicked.connect(self.validData)
         # 无效
         self.view.ui.InvalidButton.clicked.connect(self.invalidData)
+        # 取消
+        self.view.ui.CancelButton.clicked.connect(self.cancelData)
         # 开始标签
         self.view.ui.StartTagButton.clicked.connect(self.startTag)

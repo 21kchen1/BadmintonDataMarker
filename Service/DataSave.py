@@ -82,7 +82,6 @@ class DataSave:
             dataSet.append(dataUnit.__dict__)
             # 存储数据
             with open(self.storePath, "w", encoding= Encoding.UTF8) as file:
-                # json.dump(dataSet, file, cls= Json.CompactArrayEncoder, ensure_ascii= False, indent= 4)
                 # 紧凑数组编码
                 file.write(Json.compactArrayJson(dataSet))
         except Exception as e:
@@ -91,5 +90,35 @@ class DataSave:
         return True
 
     """
-        删除下标指定
+        删除下标指定数据单元
+        @param index 数据单元下标
+        @return bool 是否删除成功
     """
+    def deleteDataUnit(self, index: int) -> None:
+        # 存储路径异常
+        if not self.storePath or not os.path.exists(self.storePath):
+            return False
+
+        # 下标异常
+        if index < 0:
+            return False
+
+        try:
+            # 读取数据
+            with open(self.storePath, "r", newline= "", encoding= Encoding.UTF8) as file:
+                dataSet = json.load(file)
+            if not isinstance(dataSet, list):
+                return False
+            # 下标越界
+            if index >= len(dataSet):
+                return False
+            # 移除
+            del dataSet[index]
+            # 存储数据
+            with open(self.storePath, "w", encoding= Encoding.UTF8) as file:
+                # 紧凑数组编码
+                file.write(Json.compactArrayJson(dataSet))
+        except Exception as e:
+            logging.error(e)
+            return False
+        return True

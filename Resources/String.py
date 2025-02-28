@@ -29,7 +29,9 @@ class ErrorInfo:
     DATALOAD_PATH = "Data Load Path Exception."
     DATALOAD = "Data Load Exception."
     STORAGE_FILE = "Storage File Exception."
+    STORAGE_FILE_NULL = "The Storage File is Empty."
     TAG_SET = "Tag Set Exception."
+
 
 """
     与编码相关的字符串
