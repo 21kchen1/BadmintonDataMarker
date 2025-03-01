@@ -1,5 +1,6 @@
 from Controller.Controller import Controller
 from Resources import Integer
+from Resources import String
 from Resources.String import DataType
 from Service.DataShow import DataShow
 from View.View import View
@@ -35,8 +36,10 @@ class DataShowController(Controller):
     def __init__(self, dataShow: DataShow, view: View) -> None:
         super().__init__(view)
         self.dataShow = dataShow
-        # 是否播放
+        # 是否播放视频
         self.isPlaying = False
+        # 是否显示图像
+        self.isShowing = False
         # 当前时间戳
         self.nowTimestamp = 0
         # 当前进度
@@ -56,6 +59,9 @@ class DataShowController(Controller):
         使用当前设置显示图表
     """
     def showGraph(self) -> None:
+        # 显示判断
+        if not self.isShowing:
+            return
         # 设置异常
         if not self.nowDataType or not self.nowTimeRange:
             return
@@ -100,6 +106,26 @@ class DataShowController(Controller):
         self.showGraph()
 
     """
+        图表显示设置
+        设置图表是否显示
+    """
+    def isshowSet(self) -> None:
+        # 现在未显示
+        if not self.isShowing:
+            self.isShowing = True
+            # 显示图表
+            self.showGraph()
+            # 设置按钮文本
+            self.view.ui.ShowButton.setText(String.Graph.HIDE)
+            return
+        # 现在显示
+        self.isShowing = False
+        # 清除图表
+        self.view.GraphWidget.clean()
+        # 设置按钮文本
+        self.view.ui.ShowButton.setText(String.Graph.SHOW)
+
+    """
         DataType 设置
         读取数据并更新图表
     """
@@ -108,7 +134,7 @@ class DataShowController(Controller):
         button = self.view.ui.DataTypeGroup.checkedButton()
         dataType = DataShowController.RADIO_TYPE_DICT.get(button.objectName())
         # 如果没有对应的类型
-        if not dataType:
+        if dataType == None:
             return
         self.nowDataType = dataType
         self.showGraph()
@@ -220,7 +246,8 @@ class DataShowController(Controller):
         self.view.ui.PlayButton.clicked.connect(self.playData)
         self.view.ui.StopButton.clicked.connect(self.stopData)
         self.view.timer.timeout.connect(self.playLoop)
-        # 图表 设置与更新
+        # 图表 显示，设置与更新
+        self.view.ui.ShowButton.clicked.connect(self.isshowSet)
         self.view.ui.DataTypeGroup.buttonClicked.connect(self.dataTypeSet)
         self.view.ui.AxisGroup.buttonClicked.connect(self.axisSet)
         self.view.ui.RangeSpinBox.valueChanged.connect(self.rangeSet)

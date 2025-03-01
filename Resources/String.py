@@ -48,6 +48,9 @@ class Encoding:
 class Graph:
     X_LABEL = "Timestamp (ms)"
     Y_LABEL = "Value"
+    # 显示按钮的字符串
+    SHOW = "Show"
+    HIDE = "Hide"
 
 """
     与按钮相关的字符串
