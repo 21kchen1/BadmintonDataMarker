@@ -1,7 +1,5 @@
 import json
 import os
-import numpy as np
-from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 import matplotlib
 
@@ -12,28 +10,32 @@ head = "G:\\Badminton\\TestData"
 head = "D:\\vscode\\code\\item_vscode\\Badminton\\DataMarker\\Test\\TestData"
 fileName = "Large.json"
 
+
+
 dataUnitList = []
 with open(os.path.join(head, fileName), "r", newline= "") as file:
     dataUnitList = json.load(file)
 
-index = 2
+dataName = "data"
+interDataName = "interData"
+Timestamp = "timestamp"
+dataTypeList = ["ACCELEROMETER", "GYROSCOPE", "GYROSCOPE_UNCALIBRATED", "MAGNETIC_FIELD", "MAGNETIC_FIELD_UNCALIBRATED", "ROTATION_VECTOR"]
 
-x = dataUnitList[index]["data"]["ACCELEROMETER"]["timestamp"]
-y = dataUnitList[index]["data"]["ACCELEROMETER"]["Gx"]
-y1 = dataUnitList[index]["data"]["ACCELEROMETER"]["Gy"]
-y2 = dataUnitList[index]["data"]["ACCELEROMETER"]["Gz"]
+for dataType in dataTypeList:
+    for index in range(0, 2):
+        AttrDict = dataUnitList[index][dataName][dataType]
+        for attrName, attrValues in AttrDict.items():
+            if attrName == Timestamp:
+                continue
+            plt.plot(AttrDict[Timestamp], attrValues, "o", label= attrName)
 
-plt.plot(x, y, 'o', label='Gx')
-plt.plot(x, y1, 'o', label='Gy')
-plt.plot(x, y2, 'o', label='Gz')
+        AttrDict = dataUnitList[index][interDataName][dataType]
 
-newx = dataUnitList[index]["interData"]["ACCELEROMETER"]["timestamp"]
-newy = dataUnitList[index]["interData"]["ACCELEROMETER"]["Gx"]
-newy1 = dataUnitList[index]["interData"]["ACCELEROMETER"]["Gy"]
-newy2 = dataUnitList[index]["interData"]["ACCELEROMETER"]["Gz"]
-
-plt.plot(newx, newy, '-', label='插值后 Gx')
-plt.plot(newx, newy1, '-', label='插值后 Gy')
-plt.plot(newx, newy2, '-', label='插值后 Gz')
-plt.legend()
-plt.show()
+        for attrName, attrValues in AttrDict.items():
+            if attrName == Timestamp:
+                continue
+            plt.plot(AttrDict[Timestamp], attrValues, "-", label= f"Inter {attrName}")
+        plt.legend()
+        manager = plt.get_current_fig_manager()
+        manager.window.showMaximized()
+        plt.show()

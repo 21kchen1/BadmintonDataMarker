@@ -285,10 +285,10 @@
                      <number>200000000</number>
                     </property>
                     <property name="singleStep">
-                     <number>100</number>
+                     <number>200</number>
                     </property>
                     <property name="value">
-                     <number>530</number>
+                     <number>430</number>
                     </property>
                    </widget>
                   </item>
