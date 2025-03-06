@@ -1,3 +1,4 @@
+from typing import Union
 from Model.Dataset.Info import Info
 from Model.Dataset.Label import Label
 
@@ -14,7 +15,7 @@ class DataUnit:
         @param data 数据
         @param interData 插值数据
     """
-    def __init__(self, info: Info, label: Label = None, data: dict = None, interData: dict = None) -> None:
+    def __init__(self, info: Info, label: Union[Label, None] = None, data: Union[dict, None] = None, interData: Union[dict, None] = None) -> None:
         self.info = info.__dict__
         if label == None: self.label = label
         else: self.label = label.__dict__

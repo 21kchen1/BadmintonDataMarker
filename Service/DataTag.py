@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Union
 from Model.Data.TypeDataList import TypeDataList
 from Model.Dataset.DataUnit import DataUnit
 from Model.Dataset.Info import Info
@@ -33,7 +33,7 @@ class DataTag:
         获取击球点数量
         @return int 数量
     """
-    def getPositionNum(self) -> int:
+    def getPositionNum(self) -> Union[int, None]:
         positionData = self.modelDict.get(DataType.POSITION)
         if not positionData or positionData.emptyData():
             return None
@@ -46,7 +46,7 @@ class DataTag:
         @return float 坐标 y
         @return int 时间戳
     """
-    def getPositionByIndex(self, index: int) -> Tuple[float, float, int]:
+    def getPositionByIndex(self, index: int) -> Union[Tuple[float, float, int], Tuple[None, None, None]]:
         positionData = self.modelDict.get(DataType.POSITION)
         # 无效或超过范围
         if not positionData or positionData.emptyData() or index >= positionData.listLen:

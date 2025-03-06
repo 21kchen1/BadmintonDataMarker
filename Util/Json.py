@@ -1,4 +1,5 @@
 import json
+from typing import Union
 
 """
     JSON 自定义序列化逻辑
@@ -21,7 +22,7 @@ class SingleLineArrayEncoder(json.JSONEncoder):
     @param data 需要转换的字典
     @return dict 转换完成的字典
 """
-def dictListToStr(data: dict) -> dict:
+def dictListToStr(data: dict) -> Union[dict, str]:
     if isinstance(data, list):
         return str(data)
     if not isinstance(data, dict):

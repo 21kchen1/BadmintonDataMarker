@@ -1,4 +1,5 @@
 import logging
+from typing import Union
 from Controller.Controller import Controller
 from Model.Dataset.DataUnit import DataUnit
 from Model.Dataset.Label import Label
@@ -68,7 +69,7 @@ class DataTagController(Controller):
         获取当前标签
         @return Label 数据标签
     """
-    def getDataLabel(self) -> Label:
+    def getDataLabel(self) -> Union[Label, None]:
         try:
             positionX = float(self.view.ui.XLineEdit.text())
             positionY = float(self.view.ui.YLineEdit.text())

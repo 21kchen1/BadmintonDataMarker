@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Union
 from PyQt5.QtGui import QImage
 import numpy as np
 import cv2
@@ -32,7 +32,7 @@ class DataShow:
         @return QImage 图像
         @return float 进度百分比
     """
-    def getVideoQImage(self, timestamp: int) -> Tuple[QImage, float]:
+    def getVideoQImage(self, timestamp: int) -> Union[Tuple[QImage, float], Tuple[None, None]]:
         videoData = self.modelDict.get(DataType.VIDEO)
         # 不存在或未载入
         if not videoData or videoData.emptyData():
@@ -60,7 +60,7 @@ class DataShow:
         @param end 终点时间戳
         @return list 时间戳
     """
-    def getTypeDataTimestamp(self, dataType: str, start: int, end: int) -> list:
+    def getTypeDataTimestamp(self, dataType: str, start: int, end: int) -> Union[list, None]:
         # 获取数据类型
         typeData = self.modelDict.get(dataType)
         # 没有数据类型或未载入
@@ -79,7 +79,7 @@ class DataShow:
         @param end 终点时间戳
         @return list (名称, 数值)
     """
-    def getTypeAttrList(self, dataType: str, start= None, end= None) -> list:
+    def getTypeAttrList(self, dataType: str, start= None, end= None) -> Union[list, None]:
         # 获取数据类型
         typeData = self.modelDict.get(dataType)
         # 没有数据类型或未载入

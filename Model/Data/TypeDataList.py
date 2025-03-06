@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Union
 from Resources import String
 from Util.BSearch import bSearchL, bSearchR
 import numpy
@@ -97,7 +97,7 @@ class TypeDataList:
         @return int 大于等于 start 的时间戳下标
         @return int 小于等于 end 的时间戳下标
     """
-    def getRangeIndex(self, start: int, end: int) -> Tuple[int, int]:
+    def getRangeIndex(self, start: int, end: int) -> Union[Tuple[int, int], Tuple[None, None]]:
         # 如果没有载入数据
         if self.listLen <= 0 or start > end:
             return None, None
@@ -116,7 +116,7 @@ class TypeDataList:
         @param index 数字下标
         @return list 值
     """
-    def getValueByIndex(self, index: int) -> list:
+    def getValueByIndex(self, index: int) -> Union[list, None]:
         if index >= self.valueNum:
             return None
         attrList = list(self.__dict__.keys())
@@ -129,7 +129,7 @@ class TypeDataList:
         @param index 数字下标
         @return int 时间戳
     """
-    def getTimeStampByIndex(self, index: int) -> int:
+    def getTimeStampByIndex(self, index: int) -> Union[int, None]:
         if index >= self.listLen:
             return None
         return self.timestamp[index]
