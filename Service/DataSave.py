@@ -94,7 +94,7 @@ class DataSave:
         @param index 数据单元下标
         @return bool 是否删除成功
     """
-    def deleteDataUnit(self, index: int) -> None:
+    def deleteDataUnit(self, index: int) -> bool:
         # 存储路径异常
         if not self.storePath or not os.path.exists(self.storePath):
             return False

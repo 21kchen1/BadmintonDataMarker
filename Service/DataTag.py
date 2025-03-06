@@ -1,3 +1,4 @@
+from typing import Tuple
 from Model.Data.TypeDataList import TypeDataList
 from Model.Dataset.DataUnit import DataUnit
 from Model.Dataset.Info import Info
@@ -45,7 +46,7 @@ class DataTag:
         @return float 坐标 y
         @return int 时间戳
     """
-    def getPositionByIndex(self, index: int) -> tuple:
+    def getPositionByIndex(self, index: int) -> Tuple[float, float, int]:
         positionData = self.modelDict.get(DataType.POSITION)
         # 无效或超过范围
         if not positionData or positionData.emptyData() or index >= positionData.listLen:

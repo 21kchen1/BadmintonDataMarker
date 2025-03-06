@@ -1,3 +1,4 @@
+from typing import Tuple
 from PyQt5.QtGui import QImage
 import numpy as np
 import cv2
@@ -31,7 +32,7 @@ class DataShow:
         @return QImage 图像
         @return float 进度百分比
     """
-    def getVideoQImage(self, timestamp: int) -> QImage:
+    def getVideoQImage(self, timestamp: int) -> Tuple[QImage, float]:
         videoData = self.modelDict.get(DataType.VIDEO)
         # 不存在或未载入
         if not videoData or videoData.emptyData():

@@ -1,3 +1,4 @@
+from typing import Tuple
 from Resources import String
 from Util.BSearch import bSearchL, bSearchR
 import numpy
@@ -96,7 +97,7 @@ class TypeDataList:
         @return int 大于等于 start 的时间戳下标
         @return int 小于等于 end 的时间戳下标
     """
-    def getRangeIndex(self, start: int, end: int) -> tuple:
+    def getRangeIndex(self, start: int, end: int) -> Tuple[int, int]:
         # 如果没有载入数据
         if self.listLen <= 0 or start > end:
             return None, None
