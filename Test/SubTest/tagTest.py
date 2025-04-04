@@ -37,6 +37,7 @@ attrName, attrValues = list(AttrDict.items())[dataType + 1]
 timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
 # plt.plot(timestamp, attrValues, "-", label= f"Cubic Interpolation {attrName}")
 # plt.legend(loc='lower left')
+plt.title("Backswing and Hit")
 plt.legend(loc='upper left')
 plt.xlabel("Timestamp (ms)")
 plt.ylabel("Gyroscope y (rad/s)")
@@ -61,7 +62,10 @@ for dataType in dataTypeList:
         #         continue
         #     timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
         #     plt.plot(timestamp, attrValues, "-", label= f"Inter {attrName}")
-        plt.legend()
+        # plt.title("Backswing and Hit")
+        plt.legend(loc='upper right')
+        plt.xlabel("Timestamp (ms)")
+        plt.ylabel("Gyroscope (rad/s)")
         manager = plt.get_current_fig_manager()
         manager.window.showMaximized()
         plt.show()
