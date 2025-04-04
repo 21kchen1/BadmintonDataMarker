@@ -66,7 +66,7 @@ class GraphWidget(QWidget):
         # 设置标签与字体
         ax.set_xlabel(Graph.X_LABEL)
         ax.set_ylabel(Graph.Y_LABEL)
-        ax.tick_params(axis='both', labelsize= matplotlib.rcParams['font.size'] / 3 * 2)
+        ax.tick_params(axis='both', labelsize= matplotlib.rcParams['font.size'])
         # 有数据才显示图例
         if dataDict:
             ax.legend(loc='upper left')

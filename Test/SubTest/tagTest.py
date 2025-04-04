@@ -3,13 +3,12 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib
 
-matplotlib.rcParams['font.family'] = "SimHei"
-matplotlib.rcParams['font.size'] = 20
+matplotlib.rcParams['font.family'] = 'Consolas'
+matplotlib.rcParams['font.size'] = 30
 
 head = "G:\\Badminton\\TestData"
 head = "D:\\vscode\\code\\item_vscode\\Badminton\\DataMarker\\Test\\TestData"
-fileName = "Large.json"
-
+fileName = "TestJ.json"
 
 
 dataUnitList = []
@@ -19,22 +18,49 @@ with open(os.path.join(head, fileName), "r", newline= "") as file:
 dataName = "data"
 interDataName = "interData"
 Timestamp = "timestamp"
-dataTypeList = ["ACCELEROMETER", "GYROSCOPE", "GYROSCOPE_UNCALIBRATED", "MAGNETIC_FIELD", "MAGNETIC_FIELD_UNCALIBRATED", "ROTATION_VECTOR"]
+dataTypeList = ["ACCELEROMETER", "GYROSCOPE", "MAGNETIC_FIELD", "ROTATION_VECTOR", "GYROSCOPE_UNCALIBRATED", "MAGNETIC_FIELD_UNCALIBRATED"]
+dataTypeList = ["GYROSCOPE"]
 
+# 显示单组数据
+# 第几个机器数据
+index = 3
+dataType = 1
+# 未插值数据
+AttrDict = dataUnitList[index][dataName][dataTypeList[0]]
+attrName, attrValues = list(AttrDict.items())[dataType]
+# 自定义时间戳
+timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+plt.plot(timestamp, attrValues, "o-", label= attrName)
+# 插值数据
+AttrDict = dataUnitList[index][interDataName][dataTypeList[0]]
+attrName, attrValues = list(AttrDict.items())[dataType + 1]
+timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+# plt.plot(timestamp, attrValues, "-", label= f"Cubic Interpolation {attrName}")
+# plt.legend(loc='lower left')
+plt.legend(loc='upper left')
+plt.xlabel("Timestamp (ms)")
+plt.ylabel("Gyroscope y (rad/s)")
+manager = plt.get_current_fig_manager()
+manager.window.showMaximized()
+plt.show()
+
+# 显示多组数据
 for dataType in dataTypeList:
-    for index in range(0, 2):
+    for index in range(0, 3):
         AttrDict = dataUnitList[index][dataName][dataType]
         for attrName, attrValues in AttrDict.items():
             if attrName == Timestamp:
                 continue
-            plt.plot(AttrDict[Timestamp], attrValues, "o", label= attrName)
+            timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+            plt.plot(timestamp, attrValues, "o-", label= attrName)
 
         AttrDict = dataUnitList[index][interDataName][dataType]
 
-        for attrName, attrValues in AttrDict.items():
-            if attrName == Timestamp:
-                continue
-            plt.plot(AttrDict[Timestamp], attrValues, "-", label= f"Inter {attrName}")
+        # for attrName, attrValues in AttrDict.items():
+        #     if attrName == Timestamp:
+        #         continue
+        #     timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+        #     plt.plot(timestamp, attrValues, "-", label= f"Inter {attrName}")
         plt.legend()
         manager = plt.get_current_fig_manager()
         manager.window.showMaximized()
