@@ -10,7 +10,7 @@ import matplotlib
 
 # 设置图标字体
 matplotlib.rcParams['font.family'] = 'Consolas'
-matplotlib.rcParams['font.size'] = 30
+matplotlib.rcParams['font.size'] = 20
 
 """
     视图，显示 GUI
