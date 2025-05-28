@@ -23,10 +23,12 @@ class SingleLineArrayEncoder(json.JSONEncoder):
     @return dict 转换完成的字典
 """
 def dictListToStr(data: dict) -> Union[dict, str]:
+    # 将字典转换为字符串
     if isinstance(data, list):
         return str(data)
     if not isinstance(data, dict):
         return data
+    # 如果是字典，则将所有值中的 list 转换为字符串
     for key, value in data.items():
         data[key] = dictListToStr(value)
     return data
