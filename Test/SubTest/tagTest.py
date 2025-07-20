@@ -7,8 +7,10 @@ matplotlib.rcParams['font.family'] = 'Consolas'
 matplotlib.rcParams['font.size'] = 30
 
 head = "G:\\Badminton\\TestData"
-head = "D:\\vscode\\code\\item_vscode\\Badminton\\DataMarker\\Test\\TestData"
-fileName = "TestJ.json"
+# head = "D:\\vscode\\code\\item_vscode\\Badminton\\DataMarker\\Test\\TestData"
+head = r"G:\Badminton\BADS_CLL_E"
+# fileName = "TestJ.json"
+fileName = "Man_Low_BackhandTransition_LeiYang_1_1.json"
 
 
 dataUnitList = []
@@ -19,7 +21,7 @@ dataName = "data"
 interDataName = "interData"
 Timestamp = "timestamp"
 dataTypeList = ["ACCELEROMETER", "GYROSCOPE", "MAGNETIC_FIELD", "ROTATION_VECTOR", "GYROSCOPE_UNCALIBRATED", "MAGNETIC_FIELD_UNCALIBRATED"]
-dataTypeList = ["GYROSCOPE"]
+# dataTypeList = ["GYROSCOPE"]
 
 # 显示单组数据
 # 第几个机器数据
@@ -29,13 +31,15 @@ dataType = 1
 AttrDict = dataUnitList[index][dataName][dataTypeList[0]]
 attrName, attrValues = list(AttrDict.items())[dataType]
 # 自定义时间戳
-timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+# timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+timestamp = AttrDict[Timestamp]
 plt.plot(timestamp, attrValues, "o-", label= attrName)
 # 插值数据
 AttrDict = dataUnitList[index][interDataName][dataTypeList[0]]
 attrName, attrValues = list(AttrDict.items())[dataType + 1]
-timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
-# plt.plot(timestamp, attrValues, "-", label= f"Cubic Interpolation {attrName}")
+# timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+timestamp = AttrDict[Timestamp]
+plt.plot(timestamp, attrValues, "-", label= f"Cubic Interpolation {attrName}")
 # plt.legend(loc='lower left')
 plt.title("Backswing and Hit")
 plt.legend(loc='upper left')
@@ -52,17 +56,17 @@ for dataType in dataTypeList:
         for attrName, attrValues in AttrDict.items():
             if attrName == Timestamp:
                 continue
-            timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
+            timestamp = AttrDict[Timestamp]
             plt.plot(timestamp, attrValues, "o-", label= attrName)
 
         AttrDict = dataUnitList[index][interDataName][dataType]
 
-        # for attrName, attrValues in AttrDict.items():
-        #     if attrName == Timestamp:
-        #         continue
-        #     timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
-        #     plt.plot(timestamp, attrValues, "-", label= f"Inter {attrName}")
-        # plt.title("Backswing and Hit")
+        for attrName, attrValues in AttrDict.items():
+            if attrName == Timestamp:
+                continue
+            timestamp = AttrDict[Timestamp]
+            plt.plot(timestamp, attrValues, "-", label= f"Inter {attrName}")
+        plt.title("Backswing and Hit")
         plt.legend(loc='upper right')
         plt.xlabel("Timestamp (ms)")
         plt.ylabel("Gyroscope (rad/s)")
