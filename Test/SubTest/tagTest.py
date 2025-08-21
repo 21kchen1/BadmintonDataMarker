@@ -8,9 +8,9 @@ matplotlib.rcParams['font.size'] = 30
 
 head = "G:\\Badminton\\TestData"
 # head = "D:\\vscode\\code\\item_vscode\\Badminton\\DataMarker\\Test\\TestData"
-head = r"G:\Badminton\BADS_CLL_E"
+head = r"G:\Badminton\BADS_CLL_E_CLEAN_A"
 # fileName = "TestJ.json"
-fileName = "Man_Low_BackhandTransition_LeiYang_1_1.json"
+fileName = "Man_Low_ForehandLob_LeiYang_1_1.json"
 
 
 dataUnitList = []
@@ -20,13 +20,13 @@ with open(os.path.join(head, fileName), "r", newline= "") as file:
 dataName = "data"
 interDataName = "interData"
 Timestamp = "timestamp"
-dataTypeList = ["ACCELEROMETER", "GYROSCOPE", "MAGNETIC_FIELD", "ROTATION_VECTOR", "GYROSCOPE_UNCALIBRATED", "MAGNETIC_FIELD_UNCALIBRATED"]
+dataTypeList = ["AUDIO", "ACCELEROMETER", "GYROSCOPE", "MAGNETIC_FIELD", "ROTATION_VECTOR", "GYROSCOPE_UNCALIBRATED", "MAGNETIC_FIELD_UNCALIBRATED"]
 # dataTypeList = ["GYROSCOPE"]
 
 # 显示单组数据
 # 第几个机器数据
 index = 3
-dataType = 1
+dataType = 0
 # 未插值数据
 AttrDict = dataUnitList[index][dataName][dataTypeList[0]]
 attrName, attrValues = list(AttrDict.items())[dataType]
@@ -36,10 +36,10 @@ timestamp = AttrDict[Timestamp]
 plt.plot(timestamp, attrValues, "o-", label= attrName)
 # 插值数据
 AttrDict = dataUnitList[index][interDataName][dataTypeList[0]]
-attrName, attrValues = list(AttrDict.items())[dataType + 1]
+attrName, attrValues = list(AttrDict.items())[dataType]
 # timestamp = [time - AttrDict[Timestamp][0] for time in AttrDict[Timestamp]]
 timestamp = AttrDict[Timestamp]
-plt.plot(timestamp, attrValues, "-", label= f"Cubic Interpolation {attrName}")
+# plt.plot(timestamp, attrValues, "-", label= f"Cubic Interpolation {attrName}")
 # plt.legend(loc='lower left')
 plt.title("Backswing and Hit")
 plt.legend(loc='upper left')
